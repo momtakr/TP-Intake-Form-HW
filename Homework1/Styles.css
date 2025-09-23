@@ -2,7 +2,7 @@
   Program name: Styles.css
   Author: Ivan Zheng
   Date Created: 09/23/2025
-  Version: 1.5
+  Version: 1.6
   Description: Styles for ZhenLife Medical Center Patient Registration Form
 */
 
@@ -15,7 +15,8 @@ body {
 
 #logo {
   border-radius: 8px;
-  margin-right: 15px;
+  margin-left: 15px;   
+  margin-right: 15px;  
 }
 
 #datetime {
@@ -99,9 +100,11 @@ footer {
 }
 
 footer a {
-  color: #0077B5;
-  text-decoration: none;
+  color: blue;                  
+  text-decoration: underline;   
   margin: 0 5px;
 }
 
-footer a:visited { color: #0077B5; }
+footer a:visited { 
+  color: darkblue;              
+}
