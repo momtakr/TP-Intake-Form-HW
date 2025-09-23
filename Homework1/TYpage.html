@@ -1,1 +1,104 @@
+<!--
+  Program name: TYpage.html
+  Author: Ivan Zheng
+  Date Created: 09/24/2025
+  Description: Thank-you page after patient registration
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thank You – ZhenLife Medical Center</title>
+  <link rel="stylesheet" href="Styles.css" />
+  <style>
+    /* Light “card” for the thank-you box */
+    .card {
+      max-width: 900px;
+      margin: 24px auto;
+      background: #ffffff;
+      border: 1px solid #d9d9d9;
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+    .card h1 {
+      margin-top: 0;
+      font-size: 2.2rem;
+      letter-spacing: 0.3px;
+    }
+    .card p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin: 10px 0 18px;
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 6px;
+      border: none;
+      background-color: #1c5e37;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn.secondary {
+      background-color: #555;
+    }
+    .btn:hover { opacity: 0.92; }
+    .muted {
+      color: #666;
+      font-size: .95rem;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header (reuses your banner style) -->
+  <div class="header-container">
+    <img src="./Zhenlife.png" alt="ZhenLife Medical Center Logo" id="logo" width="100" height="100">
+    <h1>ZhenLife Medical Center</h1>
+    <p id="datetime"></p>
+  </div>
+
+  <!-- Content -->
+  <main class="card" role="main" aria-labelledby="thanks-title">
+    <h1 id="thanks-title">Thank you!</h1>
+    <p>Your registration has been successfully submitted.</p>
+    <p class="muted">We’ve received your information. A confirmation email may be sent if follow-up is needed.</p>
+
+    <div class="actions">
+      <!-- back to your form (index.html) -->
+      <a class="btn" href="index.html">Return to Form</a>
+      <!-- optional: placeholder for next steps -->
+      <a class="btn secondary" href="#">View Patient Resources</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>ZhenLife Medical Center © 2025 |
+      <a href="#">Privacy Policy</a> |
+      <a href="index.html">Contact Us</a>
+    </p>
+  </footer>
+
+  <!-- Banner date -->
+  <script>
+    const dateElement = document.getElementById('datetime');
+    const today = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    dateElement.textContent = today.toLocaleDateString('en-US', options);
+  </script>
+</body>
+</html>
 
