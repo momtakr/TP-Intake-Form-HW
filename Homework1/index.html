@@ -4,371 +4,260 @@
     Date Created: 09/23/25
     Date Last edited: 09/24/25
     Version: 1.8
-    Description: This is the index file for TP HW 1
+    Description: Patient Registration Form 
 -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZhenLife Medical Center – Patient Registration</title>
-    <link rel="stylesheet" href="Styles.css">
-    <style>
-        .required-star { color: red; margin-left: 3px; }
-        #healthValue { font-weight: bold; margin-left: 10px; }
-        .error-msg { color: #b00020; font-size: 0.9rem; margin-top: 4px; }
-
-        /* Error summary (sticky at top of form) */
-        .error-summary {
-          border: 1px solid #ffb3b3;
-          background: #ffecec;
-          color: #8a1f1f;
-          padding: 12px 16px;
-          border-radius: 8px;
-          margin: 0 0 16px 0;
-        }
-        .error-summary h3 {
-          margin: 0 0 6px 0;
-          font-size: 1.05rem;
-        }
-        .error-summary ul { margin: 0 0 0 18px; }
-        .error-summary a {
-          color: #8a1f1f;
-          text-decoration: underline;
-        }
-
-        /* Subtle red outline for invalid fields */
-        input:invalid, select:invalid, textarea:invalid {
-          outline: 2px solid rgba(176, 0, 32, 0.25);
-          outline-offset: 1px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZhenLife Medical Center – Patient Registration</title>
+  <link rel="stylesheet" href="Styles.css">
+  <style>
+    .required-star { color: red; margin-left: 3px; }
+    #healthValue { font-weight: bold; margin-left: 10px; }
+    .error-msg { color: #b00020; font-size: 0.9rem; margin-top: 4px; }
+  </style>
 </head>
 <body>
-  
-    <!-- Header -->
-    <div class="header-container">
-        <img src="./Zhenlife.png" alt="Zhenlife Logo" id="logo" width="100" height="100">
-        <h1>ZhenLife Medical Center</h1>
-        <p id="datetime"></p>
-    </div>
 
-    <!-- Form -->
-    <div class="container">
-        <header>
-            <h2>Patient Registration</h2>
-        </header>
+  <!-- Header -->
+  <div class="header-container">
+    <img src="./Zhenlife.png" alt="Zhenlife Logo" id="logo" width="100" height="100">
+    <h1>ZhenLife Medical Center</h1>
+    <p id="datetime"></p>
+  </div>
 
-        <!-- Error summary (hidden until needed) -->
-        <div id="errorSummary" class="error-summary" role="alert" aria-live="polite" style="display:none;">
-          <h3>Please fix the following before submitting:</h3>
-          <ul id="errorList"></ul>
-        </div>
+  <!-- Form -->
+  <div class="container">
+    <header>
+      <h2>Patient Registration</h2>
+    </header>
 
-        <form id="patientForm" action="TYpage.html" method="get" novalidate>
-            <!-- Name -->
-            <div class="form">
-                <label for="firstname">First Name:<span class="required-star">*</span></label>
-                <input type="text" id="firstname" name="firstname" maxlength="30" required>
-            </div>
-            <div class="form">
-                <label for="mi">Middle Initial:</label>
-                <input type="text" id="mi" name="mi" maxlength="1">
-            </div>
-            <div class="form">
-                <label for="lastname">Last Name:<span class="required-star">*</span></label>
-                <input type="text" id="lastname" name="lastname" maxlength="30" required>
-            </div>
+    <form id="patientForm" action="TYpage.html" method="get" novalidate>
+      <!-- Name -->
+      <div class="form">
+        <label for="firstname">First Name:</label>
+        <input type="text" id="firstname" name="firstname" maxlength="30">
+      </div>
+      <div class="form">
+        <label for="mi">Middle Initial:</label>
+        <input type="text" id="mi" name="mi" maxlength="1">
+      </div>
+      <div class="form">
+        <label for="lastname">Last Name:</label>
+        <input type="text" id="lastname" name="lastname" maxlength="30">
+      </div>
 
-            <!-- DOB, SSN, Gender -->
-            <div class="form">
-                <label for="dob">Date of Birth:<span class="required-star">*</span></label>
-                <input type="date" id="dob" name="dob" required min="1900-01-01" max="">
-            </div>
-            <div class="form">
-                <label for="ssn">SSN:<span class="required-star">*</span></label>
-                <input type="password" id="ssn" name="ssn" maxlength="9" inputmode="numeric" 
-                       pattern="\d{9}" title="SSN must be exactly 9 digits" required>
-                <div id="ssnError" class="error-msg" style="display:none;">SSN must be exactly 9 digits.</div>
-            </div>
-            <div class="form">
-                <label>Gender:<span class="required-star">*</span></label>
-                <label><input type="radio" name="gender" value="Male" required> Male</label>
-                <label><input type="radio" name="gender" value="Female"> Female</label>
-                <label><input type="radio" name="gender" value="Other"> Other</label>
-            </div>
+      <!-- DOB, SSN, Gender -->
+      <div class="form">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" min="1900-01-01" max="">
+      </div>
+      <div class="form">
+        <label for="ssn">SSN:</label>
+        <input type="password" id="ssn" name="ssn" maxlength="9" inputmode="numeric">
+      </div>
+      <div class="form">
+        <label>Gender:</label>
+        <label><input type="radio" name="gender" value="Male"> Male</label>
+        <label><input type="radio" name="gender" value="Female"> Female</label>
+        <label><input type="radio" name="gender" value="Other"> Other</label>
+      </div>
 
-            <!-- Contact Info -->
-            <div class="form">
-                <label for="email">Email:<span class="required-star">*</span></label>
-                <input type="email" id="email" name="email" placeholder="name@domain.tld" required
-                       pattern="^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$"
-                       title="Use a valid email like name@domain.tld">
-                <div id="emailError" class="error-msg" style="display:none;">Please enter a valid email like name@domain.tld</div>
-            </div>
-            <div class="form">
-                <label for="phone">Phone #:<span class="required-star">*</span></label>
-                <input type="tel" id="phone" name="phone" placeholder="(123)456-7890" required>
-            </div>
+      <!-- Contact Info -->
+      <div class="form">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="name@domain.tld">
+      </div>
+      <div class="form">
+        <label for="phone">Phone #:</label>
+        <input type="tel" id="phone" name="phone" placeholder="(123)456-7890">
+      </div>
 
-            <!-- Address -->
-            <div class="form">
-                <label for="address1">Address Line 1:<span class="required-star">*</span></label>
-                <input type="text" id="address1" name="address1" maxlength="30" required>
-            </div>
-            <div class="form">
-                <label for="address2">Address Line 2:</label>
-                <input type="text" id="address2" name="address2" maxlength="30">
-            </div>
-            <div class="form">
-                <label for="city">City:<span class="required-star">*</span></label>
-                <input type="text" id="city" name="city" maxlength="30" required>
-            </div>
-            <div class="form">
-                <label for="state">State:<span class="required-star">*</span></label>
-                <select id="state" name="state" required>
-                    <option value="">Select State</option>
-                    <option value="AL">Alabama</option>
-                    <option value="AK">Alaska</option>
-                    <option value="AZ">Arizona</option>
-                    <option value="AR">Arkansas</option>
-                    <option value="CA">California</option>
-                    <option value="CO">Colorado</option>
-                    <option value="CT">Connecticut</option>
-                    <option value="DE">Delaware</option>
-                    <option value="DC">District of Columbia</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="HI">Hawaii</option>
-                    <option value="ID">Idaho</option>
-                    <option value="IL">Illinois</option>
-                    <option value="IN">Indiana</option>
-                    <option value="IA">Iowa</option>
-                    <option value="KS">Kansas</option>
-                    <option value="KY">Kentucky</option>
-                    <option value="LA">Louisiana</option>
-                    <option value="ME">Maine</option>
-                    <option value="MD">Maryland</option>
-                    <option value="MA">Massachusetts</option>
-                    <option value="MI">Michigan</option>
-                    <option value="MN">Minnesota</option>
-                    <option value="MS">Mississippi</option>
-                    <option value="MO">Missouri</option>
-                    <option value="MT">Montana</option>
-                    <option value="NE">Nebraska</option>
-                    <option value="NV">Nevada</option>
-                    <option value="NH">New Hampshire</option>
-                    <option value="NJ">New Jersey</option>
-                    <option value="NM">New Mexico</option>
-                    <option value="NY">New York</option>
-                    <option value="NC">North Carolina</option>
-                    <option value="ND">North Dakota</option>
-                    <option value="OH">Ohio</option>
-                    <option value="OK">Oklahoma</option>
-                    <option value="OR">Oregon</option>
-                    <option value="PA">Pennsylvania</option>
-                    <option value="RI">Rhode Island</option>
-                    <option value="SC">South Carolina</option>
-                    <option value="SD">South Dakota</option>
-                    <option value="TN">Tennessee</option>
-                    <option value="TX">Texas</option>
-                    <option value="UT">Utah</option>
-                    <option value="VT">Vermont</option>
-                    <option value="VA">Virginia</option>
-                    <option value="WA">Washington</option>
-                    <option value="WV">West Virginia</option>
-                    <option value="WI">Wisconsin</option>
-                    <option value="WY">Wyoming</option>
-                    <option value="PR">Puerto Rico</option>
-                </select>
-            </div>
-            <div class="form">
-                <label for="zip">Zip Code:<span class="required-star">*</span></label>
-                <input type="text" id="zip" name="zip" maxlength="10" placeholder="12345" required>
-            </div>
+      <!-- Address -->
+      <div class="form">
+        <label for="address1">Address Line 1:</label>
+        <input type="text" id="address1" name="address1" maxlength="30">
+      </div>
+      <div class="form">
+        <label for="address2">Address Line 2:</label>
+        <input type="text" id="address2" name="address2" maxlength="30">
+      </div>
+      <div class="form">
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" maxlength="30">
+      </div>
+      <div class="form">
+        <label for="state">State:</label>
+        <select id="state" name="state">
+          <option value="">Select State</option>
+          <option value="AL">Alabama</option>
+          <option value="AK">Alaska</option>
+          <option value="AZ">Arizona</option>
+          <option value="AR">Arkansas</option>
+          <option value="CA">California</option>
+          <option value="CO">Colorado</option>
+          <option value="CT">Connecticut</option>
+          <option value="DE">Delaware</option>
+          <option value="DC">District of Columbia</option>
+          <option value="FL">Florida</option>
+          <option value="GA">Georgia</option>
+          <option value="HI">Hawaii</option>
+          <option value="ID">Idaho</option>
+          <option value="IL">Illinois</option>
+          <option value="IN">Indiana</option>
+          <option value="IA">Iowa</option>
+          <option value="KS">Kansas</option>
+          <option value="KY">Kentucky</option>
+          <option value="LA">Louisiana</option>
+          <option value="ME">Maine</option>
+          <option value="MD">Maryland</option>
+          <option value="MA">Massachusetts</option>
+          <option value="MI">Michigan</option>
+          <option value="MN">Minnesota</option>
+          <option value="MS">Mississippi</option>
+          <option value="MO">Missouri</option>
+          <option value="MT">Montana</option>
+          <option value="NE">Nebraska</option>
+          <option value="NV">Nevada</option>
+          <option value="NH">New Hampshire</option>
+          <option value="NJ">New Jersey</option>
+          <option value="NM">New Mexico</option>
+          <option value="NY">New York</option>
+          <option value="NC">North Carolina</option>
+          <option value="ND">North Dakota</option>
+          <option value="OH">Ohio</option>
+          <option value="OK">Oklahoma</option>
+          <option value="OR">Oregon</option>
+          <option value="PA">Pennsylvania</option>
+          <option value="RI">Rhode Island</option>
+          <option value="SC">South Carolina</option>
+          <option value="SD">South Dakota</option>
+          <option value="TN">Tennessee</option>
+          <option value="TX">Texas</option>
+          <option value="UT">Utah</option>
+          <option value="VT">Vermont</option>
+          <option value="VA">Virginia</option>
+          <option value="WA">Washington</option>
+          <option value="WV">West Virginia</option>
+          <option value="WI">Wisconsin</option>
+          <option value="WY">Wyoming</option>
+          <option value="PR">Puerto Rico</option>
+        </select>
+      </div>
+      <div class="form">
+        <label for="zip">Zip Code:</label>
+        <input type="text" id="zip" name="zip" maxlength="10" placeholder="12345">
+      </div>
 
-            <!-- Medical Info -->
-            <div class="form">
-                <label for="health">How are you feeling today? (1-10):</label>
-                <input type="range" id="health" name="health" min="1" max="10" value="5" 
-                       oninput="healthValue.textContent = this.value">
-                <span id="healthValue">5</span>
-            </div>
-            <div class="form">
-                <label>Medical History (check all that apply):</label>
-                <label><input type="checkbox" name="history" value="Diabetes"> Diabetes</label>
-                <label><input type="checkbox" name="history" value="Asthma"> Asthma</label>
-                <label><input type="checkbox" name="history" value="Heart Disease"> Heart Disease</label>
-                <label><input type="checkbox" name="history" value="Stroke"> Stroke</label>
-                <label><input type="checkbox" name="history" value="Cancer"> Cancer</label>
-            </div>
-            <div class="form">
-                <label>Appointment Type:<span class="required-star">*</span></label>
-                <label><input type="radio" name="apptType" value="In-person" required> In-person</label>
-                <label><input type="radio" name="apptType" value="Virtual"> Virtual consultation (limited)</label>
-            </div>
-            <div class="form">
-                <label>Insurance?<span class="required-star">*</span></label>
-                <label><input type="radio" name="insurance" value="Yes" required> Yes</label>
-                <label><input type="radio" name="insurance" value="No"> No</label>
-            </div>
+      <!-- Medical Info -->
+      <div class="form">
+        <label for="health">How are you feeling today? (1-10):</label>
+        <input type="range" id="health" name="health" min="1" max="10" value="5"
+               oninput="healthValue.textContent = this.value">
+        <span id="healthValue">5</span>
+      </div>
+      <div class="form">
+        <label>Medical History (check all that apply):</label>
+        <label><input type="checkbox" name="history" value="Diabetes"> Diabetes</label>
+        <label><input type="checkbox" name="history" value="Asthma"> Asthma</label>
+        <label><input type="checkbox" name="history" value="Heart Disease"> Heart Disease</label>
+        <label><input type="checkbox" name="history" value="Stroke"> Stroke</label>
+        <label><input type="checkbox" name="history" value="Cancer"> Cancer</label>
+      </div>
+      <div class="form">
+        <label>Appointment Type:</label>
+        <label><input type="radio" name="apptType" value="In-person"> In-person</label>
+        <label><input type="radio" name="apptType" value="Virtual"> Virtual consultation (limited)</label>
+      </div>
+      <div class="form">
+        <label>Insurance?</label>
+        <label><input type="radio" name="insurance" value="Yes"> Yes</label>
+        <label><input type="radio" name="insurance" value="No"> No</label>
+      </div>
 
-            <!-- Login -->
-            <div class="form">
-                <label for="userid">User ID:<span class="required-star">*</span></label>
-                <input type="text" id="userid" name="userid" maxlength="20" required>
-            </div>
-            <div class="form">
-                <label for="password">Password:<span class="required-star">*</span></label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form">
-                <label for="confirm">Confirm Password:<span class="required-star">*</span></label>
-                <input type="password" id="confirm" name="confirm" required>
-                <div id="pwError" class="error-msg" style="display:none;">Passwords must match.</div>
-            </div>
+      <!-- Login -->
+      <div class="form">
+        <label for="userid">User ID:</label>
+        <input type="text" id="userid" name="userid" maxlength="20">
+      </div>
+      <div class="form">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+      </div>
+      <div class="form">
+        <label for="confirm">Confirm Password:</label>
+        <input type="password" id="confirm" name="confirm">
+        <div id="pwError" class="error-msg" style="display:none;">Passwords must match.</div>
+      </div>
 
-            <!-- Buttons -->
-            <div class="form">
-                <button id="submitBtn" type="submit" disabled>Submit</button>
-                <button type="reset">Clear and Start Over</button>
-            </div>
-        </form>
-    </div>
+      <!-- Buttons -->
+      <div class="form">
+        <button id="submitBtn" type="submit">Submit</button>
+        <button type="reset">Clear and Start Over</button>
+      </div>
+    </form>
+  </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>ZhenLife Medical Center © 2025 | 
-        <a href="#">Privacy Policy</a> | 
-        <a href="#">Contact Us</a></p>
-    </footer>
+  <!-- Footer -->
+  <footer>
+    <p>ZhenLife Medical Center © 2025 |
+    <a href="#">Privacy Policy</a> |
+    <a href="#">Contact Us</a></p>
+  </footer>
 
-    <!-- JS -->
-    <script>
-        
-        const dateElement = document.getElementById('datetime');
-        const today = new Date();
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        dateElement.textContent = today.toLocaleDateString('en-US', options);
+  <!-- JS -->
+  <script>
+    // Banner date
+    const dateElement = document.getElementById('datetime');
+    const today = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    if (dateElement) dateElement.textContent = today.toLocaleDateString('en-US', options);
 
-        const dobField = document.getElementById('dob');
-        if (dobField) {
-          const yyyy = today.getFullYear();
-          const mm = String(today.getMonth() + 1).padStart(2, '0');
-          const dd = String(today.getDate()).padStart(2, '0');
-          dobField.max = `${yyyy}-${mm}-${dd}`;
+    // DOB max = today
+    const dobField = document.getElementById('dob');
+    if (dobField) {
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      dobField.max = `${yyyy}-${mm}-${dd}`;
+    }
+
+    // SSN: numeric-only, cap at 9 digits
+    const ssn = document.getElementById('ssn');
+    if (ssn) {
+      ssn.addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '').slice(0, 9);
+      });
+    }
+
+    // Only password match enforced
+    const form = document.getElementById('patientForm');
+    const pw = document.getElementById('password');
+    const pw2 = document.getElementById('confirm');
+    const pwError = document.getElementById('pwError');
+
+    function passwordsMatch() {
+      const match = pw.value !== '' && pw.value === pw2.value;
+      pwError.style.display = match ? 'none' : 'block';
+      return match;
+    }
+
+    if (pw && pw2) {
+      pw.addEventListener('input', passwordsMatch);
+      pw2.addEventListener('input', passwordsMatch);
+    }
+
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        if (!passwordsMatch()) {
+          e.preventDefault();
+          pw2.focus();
         }
-
-        const ssn = document.getElementById('ssn');
-        const ssnError = document.getElementById('ssnError');
-        ssn.addEventListener('input', function () {
-            this.value = this.value.replace(/\D/g, '').slice(0, 9);
-            ssnError.style.display = (this.value.length === 9) ? 'none' : 'block';
-        });
-
-        const form = document.getElementById('patientForm');
-        const email = document.getElementById('email');
-        const emailError = document.getElementById('emailError');
-        const pw = document.getElementById('password');
-        const pw2 = document.getElementById('confirm');
-        const pwError = document.getElementById('pwError');
-        const submitBtn = document.getElementById('submitBtn');
-
-        function emailsOkay() {
-          const ok = /^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(email.value);
-          emailError.style.display = ok ? 'none' : 'block';
-          return ok;
-        }
-        function passwordsMatch() {
-          const match = pw.value !== '' && pw.value === pw2.value;
-          pwError.style.display = match ? 'none' : 'block';
-          return match;
-        }
-
-        const errorSummary = document.getElementById('errorSummary');
-        const errorList = document.getElementById('errorList');
-
-        function labelFor(id) {
-          const lbl = document.querySelector(`label[for="${id}"]`);
-          if (!lbl) return null;
-
-          return lbl.textContent.replace('*','').trim().replace(/:$/, '');
-        }
-
-        function buildErrorSummary() {
-          const fields = Array.from(form.elements).filter(el => el.willValidate !== undefined);
-          const problems = [];
-
-          // force native messages to be ready
-          fields.forEach(el => el.setCustomValidity(''));
-
-          // Custom validity hooks
-          if (!emailsOkay() && email.value !== '') {
-            email.setCustomValidity('Please enter a valid email like name@domain.tld.');
-          } else {
-            email.setCustomValidity('');
-          }
-          if (!passwordsMatch() && (pw.value !== '' || pw2.value !== '')) {
-            pw2.setCustomValidity('Passwords must match.');
-          } else {
-            pw2.setCustomValidity('');
-          }
-          if (ssn.value.length !== 9) {
-            ssn.setCustomValidity('SSN must be exactly 9 digits.');
-          } else {
-            ssn.setCustomValidity('');
-          }
-
-          fields.forEach(el => {
-            if (!el.checkValidity()) {
-              const nice = labelFor(el.id) || el.name || 'Field';
-              const msg = el.validationMessage || 'Please correct this field.';
-              problems.push({ el, text: `${nice}: ${msg}` });
-            }
-          });
-
-          errorList.innerHTML = '';
-          if (problems.length) {
-            errorSummary.style.display = '';
-            problems.forEach(p => {
-              const li = document.createElement('li');
-              const a = document.createElement('a');
-              a.href = `#${p.el.id}`;
-              a.textContent = p.text;
-              a.addEventListener('click', e => {
-                e.preventDefault();
-                p.el.focus();
-              });
-              li.appendChild(a);
-              errorList.appendChild(li);
-            });
-          } else {
-            errorSummary.style.display = 'none';
-          }
-
-          return problems;
-        }
-
-        function updateSubmitState() {
-          const problems = buildErrorSummary();
-          const allGood = problems.length === 0 && form.checkValidity();
-          submitBtn.disabled = !allGood;
-        }
-
-        form.addEventListener('input', updateSubmitState);
-        form.addEventListener('change', updateSubmitState);
-
-        form.addEventListener('submit', (e) => {
-          const problems = buildErrorSummary();
-          if (problems.length) {
-            e.preventDefault();
-            // focus first bad field
-            problems[0].el.focus();
-          }
-        });
-
-        updateSubmitState();
-    </script>
+      });
+    }
+  </script>
 </body>
 </html>
