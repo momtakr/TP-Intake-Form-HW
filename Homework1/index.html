@@ -3,8 +3,8 @@
     Author: Ivan Zheng
     Date Created: 09/23/25
     Date Last edited: 09/24/25
-    Version: 1.1
-    Descirption: This is the index file for TP HW 1
+    Version: 1.3
+    Description: This is the index file for TP HW 1
 -->
 
 <!DOCTYPE html>
@@ -47,11 +47,27 @@
         <!-- DOB, SSN, Gender -->
         <div class="form">
             <label for="dob">Date of Birth:</label>
-            <input type="text" id="dob" name="dob" placeholder="MM/DD/YYYY" required>
+            <!-- Native calendar picker -->
+            <input 
+                type="date" 
+                id="dob" 
+                name="dob" 
+                required
+                min="1900-01-01" 
+                max="">
+            <!-- Note: browsers show the date in the user's locale format -->
         </div>
         <div class="form">
             <label for="ssn">SSN:</label>
-            <input type="password" id="ssn" name="ssn" maxlength="11" placeholder="***-**-****" required>
+            <input 
+                type="password" 
+                id="ssn" 
+                name="ssn" 
+                maxlength="9" 
+                inputmode="numeric" 
+                pattern="\d{9}" 
+                title="SSN must be exactly 9 digits" 
+                required>
         </div>
         <div class="form">
             <label>Gender:</label>
@@ -156,12 +172,28 @@
         <a href="#">Contact Us</a></p>
     </footer>
 
-    <!-- JS for Date -->
+    <!-- JS -->
     <script>
+        // Dynamic date in banner
         const dateElement = document.getElementById('datetime');
         const today = new Date();
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         dateElement.textContent = today.toLocaleDateString('en-US', options);
+
+        // Set DOB max to today (prevents future dates)
+        const dobField = document.getElementById('dob');
+        if (dobField) {
+          const yyyy = today.getFullYear();
+          const mm = String(today.getMonth() + 1).padStart(2, '0');
+          const dd = String(today.getDate()).padStart(2, '0');
+          dobField.max = `${yyyy}-${mm}-${dd}`;
+        }
+
+        // SSN: numeric-only, max 9 digits
+        const ssn = document.getElementById('ssn');
+        ssn.addEventListener('input', function () {
+            this.value = this.value.replace(/\D/g, '').slice(0, 9);
+        });
     </script>
 </body>
 </html>
