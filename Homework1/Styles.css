@@ -20,7 +20,8 @@ body {
 #datetime {
   font-style: italic;
   font-size: 14px;
-  margin-left: auto;         
+  margin-left: auto; 
+  margin-right: 30px;
   white-space: nowrap;       
 }
 
