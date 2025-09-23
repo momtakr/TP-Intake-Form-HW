@@ -3,7 +3,7 @@
     Author: Ivan Zheng
     Date Created: 09/23/25
     Date Last edited: 09/24/25
-    Version: 1.6
+    Version: 1.7
     Description: This is the index file for TP HW 1
 -->
 
@@ -35,7 +35,6 @@
             <h2>Patient Registration</h2>
         </header>
 
-        <!-- Wrap everything in ONE form so required/patterns work -->
         <form id="patientForm" action="TYpage.html" method="get" novalidate>
             <!-- Name -->
             <div class="form">
@@ -54,25 +53,12 @@
             <!-- DOB, SSN, Gender -->
             <div class="form">
                 <label for="dob">Date of Birth:<span class="required-star">*</span></label>
-                <input 
-                    type="date" 
-                    id="dob" 
-                    name="dob" 
-                    required
-                    min="1900-01-01" 
-                    max="">
+                <input type="date" id="dob" name="dob" required min="1900-01-01" max="">
             </div>
             <div class="form">
                 <label for="ssn">SSN:<span class="required-star">*</span></label>
-                <input 
-                    type="password" 
-                    id="ssn" 
-                    name="ssn" 
-                    maxlength="9" 
-                    inputmode="numeric" 
-                    pattern="\d{9}" 
-                    title="SSN must be exactly 9 digits"
-                    required>
+                <input type="password" id="ssn" name="ssn" maxlength="9" inputmode="numeric" 
+                       pattern="\d{9}" title="SSN must be exactly 9 digits" required>
             </div>
             <div class="form">
                 <label>Gender:<span class="required-star">*</span></label>
@@ -84,14 +70,9 @@
             <!-- Contact Info -->
             <div class="form">
                 <label for="email">Email:<span class="required-star">*</span></label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    placeholder="name@domain.tld" 
-                    required
-                    pattern="^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$"
-                    title="Use a valid email like name@domain.tld">
+                <input type="email" id="email" name="email" placeholder="name@domain.tld" required
+                       pattern="^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$"
+                       title="Use a valid email like name@domain.tld">
                 <div id="emailError" class="error-msg" style="display:none;">Please enter a valid email like name@domain.tld</div>
             </div>
             <div class="form">
@@ -178,7 +159,8 @@
             <!-- Medical Info -->
             <div class="form">
                 <label for="health">How are you feeling today? (1-10):</label>
-                <input type="range" id="health" name="health" min="1" max="10" value="5" oninput="healthValue.textContent = this.value">
+                <input type="range" id="health" name="health" min="1" max="10" value="5" 
+                       oninput="healthValue.textContent = this.value">
                 <span id="healthValue">5</span>
             </div>
             <div class="form">
@@ -190,9 +172,9 @@
                 <label><input type="checkbox" name="history" value="Cancer"> Cancer</label>
             </div>
             <div class="form">
-                <label>COVID-19 booster in the last 12 months?<span class="required-star">*</span></label>
-                <label><input type="radio" name="booster12m" value="Yes" required> Yes</label>
-                <label><input type="radio" name="booster12m" value="No"> No</label>
+                <label>Appointment Type:<span class="required-star">*</span></label>
+                <label><input type="radio" name="apptType" value="In-person" required> In-person</label>
+                <label><input type="radio" name="apptType" value="Virtual"> Virtual consultation (limited)</label>
             </div>
             <div class="form">
                 <label>Insurance?<span class="required-star">*</span></label>
@@ -253,7 +235,7 @@
             this.value = this.value.replace(/\D/g, '').slice(0, 9);
         });
 
-        // ---- Live validation: email + matching passwords; toggle submit ----
+        // Email + Password live validation
         const form = document.getElementById('patientForm');
         const email = document.getElementById('email');
         const emailError = document.getElementById('emailError');
@@ -283,7 +265,6 @@
         pw.addEventListener('input', updateSubmitState);
         pw2.addEventListener('input', updateSubmitState);
 
-        // Prevent submit if JS catches anything out of sync
         form.addEventListener('submit', (e) => {
           if (!emailsOkay() || !passwordsMatch() || !form.checkValidity()) {
             e.preventDefault();
@@ -291,7 +272,6 @@
           }
         });
 
-        // Initialize state on load
         updateSubmitState();
     </script>
 </body>
