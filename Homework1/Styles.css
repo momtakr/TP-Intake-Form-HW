@@ -100,11 +100,11 @@ footer {
 }
 
 footer a {
-  color: blue;                 
+  color: lightblue;                 
   text-decoration: underline;  
   margin: 0 5px;
 }
 
 footer a:visited { 
-  color: darkblue;              
+  color: #0000CD;              
 }
