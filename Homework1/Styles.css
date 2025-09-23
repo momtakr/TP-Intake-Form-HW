@@ -6,7 +6,6 @@
   Description: Styles for ZhenLife Medical Center Patient Registration Form
 */
 
-/* ——— Base ——— */
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -14,34 +13,32 @@ body {
   color: #222;
 }
 
-/* ——— Header ——— */
 #logo {
   border-radius: 8px;
-  margin-right: 15px;            /* space between logo and title */
+  margin-right: 15px;            
 }
 
 #datetime {
   font-style: italic;
   font-size: 14px;
-  margin-left: auto;             /* push date to the right in flex */
+  margin-left: auto;             
   white-space: nowrap;
-  padding-right: 30px;           /* only add right-side space */
+  padding-right: 30px;           
 }
 
 .header-container {
   background-color: #0f221a;
   color: white;
-  padding: 16px;                 /* adds left padding so logo isn’t stuck */
+  padding: 8px;                 
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .header-container h1 {
-  margin: 0;                     /* keep title tight vertically */
+  margin: 0;                     
 }
 
-/* ——— Main Card ——— */
 .container {
   max-width: 700px;
   margin: 20px auto;
@@ -51,7 +48,6 @@ body {
   border-radius: 8px;
 }
 
-/* ——— Form ——— */
 .form {
   margin-bottom: 15px;
 }
@@ -77,13 +73,11 @@ textarea {
 
 textarea { resize: vertical; }
 
-/* name selector example for rubric */
 input[name="userid"] {
   background-color: #fafafa;
   border: 1px solid #666;
 }
 
-/* ——— Buttons ——— */
 button {
   padding: 10px 15px;
   margin-right: 10px;
@@ -97,7 +91,6 @@ button {
 button[type="reset"] { background-color: #555; }
 button:hover { opacity: 0.9; }
 
-/* ——— Footer ——— */
 footer {
   text-align: center;
   padding: 15px;
