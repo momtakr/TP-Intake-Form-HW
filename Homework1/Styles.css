@@ -100,19 +100,19 @@ footer {
 }
 
 footer a {
-  color: blue;               /* normal links */
+  color: blue;              
   text-decoration: underline;
   margin: 0 5px;
 }
 
 footer a:visited {
-  color: #0000CD;            /* medium blue for visited links */
+  color: #0000CD;           
 }
 
 footer a:hover {
-  color: #1E90FF;            /* dodger blue on hover */
+  color: #1E90FF;         
 }
 
 footer a:active {
-  color: #00008B;            /* dark blue while clicking */
+  color: #00008B;            
 }
