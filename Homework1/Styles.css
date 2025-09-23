@@ -28,7 +28,6 @@ body {
 .header-container {
   background-color: #0f221a;
   color: white;
-  padding: 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
