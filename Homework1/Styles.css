@@ -20,15 +20,14 @@ body {
 #datetime {
   font-style: italic;
   font-size: 14px;
-  margin-left: auto; 
-  margin-right: 120px;
+  margin-left: auto;         
   white-space: nowrap;       
 }
 
 .header-container {
   background-color: #0f221a;
   color: white;
-  padding: 16px;
+  padding: 16px 32px;       
   display: flex;
   align-items: center;
   justify-content: space-between; 
