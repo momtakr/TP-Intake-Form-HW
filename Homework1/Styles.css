@@ -15,7 +15,7 @@ body {
 
 #logo {
   border-radius: 8px;
-  margin-right: 15px;            
+  margin-right: 15px;
 }
 
 #datetime {
@@ -29,7 +29,7 @@ body {
 .header-container {
   background-color: #0f221a;
   color: white;
-  padding: 8px;                 
+  padding: 4px;                 
   display: flex;
   align-items: center;
   justify-content: space-between;
