@@ -3,8 +3,8 @@
     Author: Ivan Zheng
     Date Created: 09/23/25
     Date Last edited: 09/24/25
-    Version: 1.8
-    Description: Patient Registration Form 
+    Version: 1.9
+    Description: Patient Registration Form (table layout + mixed fonts + phone formatting)
 -->
 
 <!DOCTYPE html>
@@ -15,9 +15,30 @@
   <title>ZhenLife Medical Center – Patient Registration</title>
   <link rel="stylesheet" href="Styles.css">
   <style>
+    /* rubric helpers */
+    body { font-family: Arial, Helvetica, sans-serif; }
+    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; letter-spacing: .2px; }
+
     .required-star { color: red; margin-left: 3px; }
     #healthValue { font-weight: bold; margin-left: 10px; }
     .error-msg { color: #b00020; font-size: 0.9rem; margin-top: 4px; }
+
+    /* table layout */
+    .form-table{ width:100%; border-collapse:separate; border-spacing:10px 12px; }
+    .form-table td:first-child{ width:220px; vertical-align:middle; font-weight:600; }
+    .form-table td:last-child{ width:auto; }
+    .inline-group label{ margin-right:16px; }
+
+    /* make inputs look good in table cells */
+    .form-table input[type="text"],
+    .form-table input[type="password"],
+    .form-table input[type="email"],
+    .form-table input[type="tel"],
+    .form-table select,
+    .form-table textarea {
+      width: 100%;
+      box-sizing: border-box;
+    }
   </style>
 </head>
 <body>
@@ -36,168 +57,187 @@
     </header>
 
     <form id="patientForm" action="TYpage.html" method="get" novalidate>
-      <!-- Name -->
-      <div class="form">
-        <label for="firstname">First Name:</label>
-        <input type="text" id="firstname" name="firstname" maxlength="30">
-      </div>
-      <div class="form">
-        <label for="mi">Middle Initial:</label>
-        <input type="text" id="mi" name="mi" maxlength="1">
-      </div>
-      <div class="form">
-        <label for="lastname">Last Name:</label>
-        <input type="text" id="lastname" name="lastname" maxlength="30">
-      </div>
+      <table class="form-table">
+        <!-- Name -->
+        <tr>
+          <td><label for="firstname">First Name:</label></td>
+          <td><input type="text" id="firstname" name="firstname" maxlength="30"></td>
+        </tr>
+        <tr>
+          <td><label for="mi">Middle Initial:</label></td>
+          <td><input type="text" id="mi" name="mi" maxlength="1"></td>
+        </tr>
+        <tr>
+          <td><label for="lastname">Last Name:</label></td>
+          <td><input type="text" id="lastname" name="lastname" maxlength="30"></td>
+        </tr>
 
-      <!-- DOB, SSN, Gender -->
-      <div class="form">
-        <label for="dob">Date of Birth:</label>
-        <input type="date" id="dob" name="dob" min="1900-01-01" max="">
-      </div>
-      <div class="form">
-        <label for="ssn">SSN:</label>
-        <input type="password" id="ssn" name="ssn" maxlength="9" inputmode="numeric">
-      </div>
-      <div class="form">
-        <label>Gender:</label>
-        <label><input type="radio" name="gender" value="Male"> Male</label>
-        <label><input type="radio" name="gender" value="Female"> Female</label>
-        <label><input type="radio" name="gender" value="Other"> Other</label>
-      </div>
+        <!-- DOB, SSN, Gender -->
+        <tr>
+          <td><label for="dob">Date of Birth:</label></td>
+          <td><input type="date" id="dob" name="dob" min="1900-01-01" max=""></td>
+        </tr>
+        <tr>
+          <td><label for="ssn">SSN:</label></td>
+          <td><input type="password" id="ssn" name="ssn" maxlength="9" inputmode="numeric"></td>
+        </tr>
+        <tr>
+          <td><label>Gender:</label></td>
+          <td class="inline-group">
+            <label><input type="radio" name="gender" value="Male"> Male</label>
+            <label><input type="radio" name="gender" value="Female"> Female</label>
+            <label><input type="radio" name="gender" value="Other"> Other</label>
+          </td>
+        </tr>
 
-      <!-- Contact Info -->
-      <div class="form">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="name@domain.tld">
-      </div>
-      <div class="form">
-        <label for="phone">Phone #:</label>
-        <input type="tel" id="phone" name="phone" placeholder="(123)456-7890">
-      </div>
+        <!-- Contact Info -->
+        <tr>
+          <td><label for="email">Email:</label></td>
+          <td><input type="email" id="email" name="email" placeholder="name@domain.tld"></td>
+        </tr>
+        <tr>
+          <td><label for="phone">Phone #:</label></td>
+          <td><input type="tel" id="phone" name="phone" placeholder="(123) 456-7890"></td>
+        </tr>
 
-      <!-- Address -->
-      <div class="form">
-        <label for="address1">Address Line 1:</label>
-        <input type="text" id="address1" name="address1" maxlength="30">
-      </div>
-      <div class="form">
-        <label for="address2">Address Line 2:</label>
-        <input type="text" id="address2" name="address2" maxlength="30">
-      </div>
-      <div class="form">
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city" maxlength="30">
-      </div>
-      <div class="form">
-        <label for="state">State:</label>
-        <select id="state" name="state">
-          <option value="">Select State</option>
-          <option value="AL">Alabama</option>
-          <option value="AK">Alaska</option>
-          <option value="AZ">Arizona</option>
-          <option value="AR">Arkansas</option>
-          <option value="CA">California</option>
-          <option value="CO">Colorado</option>
-          <option value="CT">Connecticut</option>
-          <option value="DE">Delaware</option>
-          <option value="DC">District of Columbia</option>
-          <option value="FL">Florida</option>
-          <option value="GA">Georgia</option>
-          <option value="HI">Hawaii</option>
-          <option value="ID">Idaho</option>
-          <option value="IL">Illinois</option>
-          <option value="IN">Indiana</option>
-          <option value="IA">Iowa</option>
-          <option value="KS">Kansas</option>
-          <option value="KY">Kentucky</option>
-          <option value="LA">Louisiana</option>
-          <option value="ME">Maine</option>
-          <option value="MD">Maryland</option>
-          <option value="MA">Massachusetts</option>
-          <option value="MI">Michigan</option>
-          <option value="MN">Minnesota</option>
-          <option value="MS">Mississippi</option>
-          <option value="MO">Missouri</option>
-          <option value="MT">Montana</option>
-          <option value="NE">Nebraska</option>
-          <option value="NV">Nevada</option>
-          <option value="NH">New Hampshire</option>
-          <option value="NJ">New Jersey</option>
-          <option value="NM">New Mexico</option>
-          <option value="NY">New York</option>
-          <option value="NC">North Carolina</option>
-          <option value="ND">North Dakota</option>
-          <option value="OH">Ohio</option>
-          <option value="OK">Oklahoma</option>
-          <option value="OR">Oregon</option>
-          <option value="PA">Pennsylvania</option>
-          <option value="RI">Rhode Island</option>
-          <option value="SC">South Carolina</option>
-          <option value="SD">South Dakota</option>
-          <option value="TN">Tennessee</option>
-          <option value="TX">Texas</option>
-          <option value="UT">Utah</option>
-          <option value="VT">Vermont</option>
-          <option value="VA">Virginia</option>
-          <option value="WA">Washington</option>
-          <option value="WV">West Virginia</option>
-          <option value="WI">Wisconsin</option>
-          <option value="WY">Wyoming</option>
-          <option value="PR">Puerto Rico</option>
-        </select>
-      </div>
-      <div class="form">
-        <label for="zip">Zip Code:</label>
-        <input type="text" id="zip" name="zip" maxlength="10" placeholder="12345">
-      </div>
+        <!-- Address -->
+        <tr>
+          <td><label for="address1">Address Line 1:</label></td>
+          <td><input type="text" id="address1" name="address1" maxlength="30"></td>
+        </tr>
+        <tr>
+          <td><label for="address2">Address Line 2:</label></td>
+          <td><input type="text" id="address2" name="address2" maxlength="30"></td>
+        </tr>
+        <tr>
+          <td><label for="city">City:</label></td>
+          <td><input type="text" id="city" name="city" maxlength="30"></td>
+        </tr>
+        <tr>
+          <td><label for="state">State:</label></td>
+          <td>
+            <select id="state" name="state">
+              <option value="">Select State</option>
+              <option value="AL">Alabama</option>
+              <option value="AK">Alaska</option>
+              <option value="AZ">Arizona</option>
+              <option value="AR">Arkansas</option>
+              <option value="CA">California</option>
+              <option value="CO">Colorado</option>
+              <option value="CT">Connecticut</option>
+              <option value="DE">Delaware</option>
+              <option value="DC">District of Columbia</option>
+              <option value="FL">Florida</option>
+              <option value="GA">Georgia</option>
+              <option value="HI">Hawaii</option>
+              <option value="ID">Idaho</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="IA">Iowa</option>
+              <option value="KS">Kansas</option>
+              <option value="KY">Kentucky</option>
+              <option value="LA">Louisiana</option>
+              <option value="ME">Maine</option>
+              <option value="MD">Maryland</option>
+              <option value="MA">Massachusetts</option>
+              <option value="MI">Michigan</option>
+              <option value="MN">Minnesota</option>
+              <option value="MS">Mississippi</option>
+              <option value="MO">Missouri</option>
+              <option value="MT">Montana</option>
+              <option value="NE">Nebraska</option>
+              <option value="NV">Nevada</option>
+              <option value="NH">New Hampshire</option>
+              <option value="NJ">New Jersey</option>
+              <option value="NM">New Mexico</option>
+              <option value="NY">New York</option>
+              <option value="NC">North Carolina</option>
+              <option value="ND">North Dakota</option>
+              <option value="OH">Ohio</option>
+              <option value="OK">Oklahoma</option>
+              <option value="OR">Oregon</option>
+              <option value="PA">Pennsylvania</option>
+              <option value="RI">Rhode Island</option>
+              <option value="SC">South Carolina</option>
+              <option value="SD">South Dakota</option>
+              <option value="TN">Tennessee</option>
+              <option value="TX">Texas</option>
+              <option value="UT">Utah</option>
+              <option value="VT">Vermont</option>
+              <option value="VA">Virginia</option>
+              <option value="WA">Washington</option>
+              <option value="WV">West Virginia</option>
+              <option value="WI">Wisconsin</option>
+              <option value="WY">Wyoming</option>
+              <option value="PR">Puerto Rico</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="zip">Zip Code:</label></td>
+          <td><input type="text" id="zip" name="zip" maxlength="10" placeholder="12345"></td>
+        </tr>
 
-      <!-- Medical Info -->
-      <div class="form">
-        <label for="health">How are you feeling today? (1-10):</label>
-        <input type="range" id="health" name="health" min="1" max="10" value="5"
-               oninput="healthValue.textContent = this.value">
-        <span id="healthValue">5</span>
-      </div>
-      <div class="form">
-        <label>Medical History (check all that apply):</label>
-        <label><input type="checkbox" name="history" value="Diabetes"> Diabetes</label>
-        <label><input type="checkbox" name="history" value="Asthma"> Asthma</label>
-        <label><input type="checkbox" name="history" value="Heart Disease"> Heart Disease</label>
-        <label><input type="checkbox" name="history" value="Stroke"> Stroke</label>
-        <label><input type="checkbox" name="history" value="Cancer"> Cancer</label>
-      </div>
-      <div class="form">
-        <label>Appointment Type:</label>
-        <label><input type="radio" name="apptType" value="In-person"> In-person</label>
-        <label><input type="radio" name="apptType" value="Virtual"> Virtual consultation (limited)</label>
-      </div>
-      <div class="form">
-        <label>Insurance?</label>
-        <label><input type="radio" name="insurance" value="Yes"> Yes</label>
-        <label><input type="radio" name="insurance" value="No"> No</label>
-      </div>
+        <!-- Medical Info -->
+        <tr>
+          <td><label for="health">How are you feeling today? (1-10):</label></td>
+          <td>
+            <input type="range" id="health" name="health" min="1" max="10" value="5"
+                   oninput="healthValue.textContent = this.value">
+            <span id="healthValue">5</span>
+          </td>
+        </tr>
+        <tr>
+          <td><label>Medical History (check all that apply):</label></td>
+          <td class="inline-group">
+            <label><input type="checkbox" name="history" value="Diabetes"> Diabetes</label>
+            <label><input type="checkbox" name="history" value="Asthma"> Asthma</label>
+            <label><input type="checkbox" name="history" value="Heart Disease"> Heart Disease</label>
+            <label><input type="checkbox" name="history" value="Stroke"> Stroke</label>
+            <label><input type="checkbox" name="history" value="Cancer"> Cancer</label>
+          </td>
+        </tr>
+        <tr>
+          <td><label>Appointment Type:</label></td>
+          <td class="inline-group">
+            <label><input type="radio" name="apptType" value="In-person"> In-person</label>
+            <label><input type="radio" name="apptType" value="Virtual"> Virtual consultation (limited)</label>
+          </td>
+        </tr>
+        <tr>
+          <td><label>Insurance?</label></td>
+          <td class="inline-group">
+            <label><input type="radio" name="insurance" value="Yes"> Yes</label>
+            <label><input type="radio" name="insurance" value="No"> No</label>
+          </td>
+        </tr>
 
-      <!-- Login -->
-      <div class="form">
-        <label for="userid">User ID:</label>
-        <input type="text" id="userid" name="userid" maxlength="20">
-      </div>
-      <div class="form">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
-      </div>
-      <div class="form">
-        <label for="confirm">Confirm Password:</label>
-        <input type="password" id="confirm" name="confirm">
-        <div id="pwError" class="error-msg" style="display:none;">Passwords must match.</div>
-      </div>
+        <!-- Login -->
+        <tr>
+          <td><label for="userid">User ID:</label></td>
+          <td><input type="text" id="userid" name="userid" maxlength="20"></td>
+        </tr>
+        <tr>
+          <td><label for="password">Password:</label></td>
+          <td><input type="password" id="password" name="password"></td>
+        </tr>
+        <tr>
+          <td><label for="confirm">Confirm Password:</label></td>
+          <td>
+            <input type="password" id="confirm" name="confirm">
+            <div id="pwError" class="error-msg" style="display:none;">Passwords must match.</div>
+          </td>
+        </tr>
 
-      <!-- Buttons -->
-      <div class="form">
-        <button id="submitBtn" type="submit">Submit</button>
-        <button type="reset">Clear and Start Over</button>
-      </div>
+        <!-- Buttons -->
+        <tr>
+          <td></td>
+          <td>
+            <button id="submitBtn" type="submit">Submit</button>
+            <button type="reset">Clear and Start Over</button>
+          </td>
+        </tr>
+      </table>
     </form>
   </div>
 
@@ -230,6 +270,19 @@
     if (ssn) {
       ssn.addEventListener('input', function () {
         this.value = this.value.replace(/\D/g, '').slice(0, 9);
+      });
+    }
+
+    // Phone: live format to (###) ###-####
+    const phone = document.getElementById('phone');
+    if (phone) {
+      phone.addEventListener('input', () => {
+        let v = phone.value.replace(/\D/g, '').slice(0, 10);
+        let out = '';
+        if (v.length > 0) out = '(' + v.slice(0, Math.min(3, v.length));
+        if (v.length >= 4) out += ') ' + v.slice(3, Math.min(6, v.length));
+        if (v.length >= 7) out += '-' + v.slice(6);
+        phone.value = out;
       });
     }
 
