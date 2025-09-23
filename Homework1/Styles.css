@@ -20,6 +20,8 @@ body {
 #datetime {
   font-style: italic;
   font-size: 14px;
+  margin-left: auto;         
+  white-space: nowrap;       
 }
 
 .header-container {
@@ -29,6 +31,10 @@ body {
   display: flex;
   align-items: center;
   gap: 15px;
+}
+
+.header-container h1 {
+  margin: 0;                 
 }
 
 .container {
@@ -106,4 +112,3 @@ footer a {
 footer a:visited {
   color: #4caf50; 
 }
-
