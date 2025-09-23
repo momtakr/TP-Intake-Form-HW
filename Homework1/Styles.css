@@ -99,9 +99,9 @@ footer {
 }
 
 footer a {
-  color: #darkblue;
+  color: #0077B5;
   text-decoration: none;
   margin: 0 5px;
 }
 
-footer a:visited { color: #darkblue; }
+footer a:visited { color: #0077B5; }
