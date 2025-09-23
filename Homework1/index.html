@@ -3,7 +3,7 @@
     Author: Ivan Zheng
     Date Created: 09/23/25
     Date Last edited: 09/24/25
-    Version: 1.5
+    Version: 1.6
     Description: This is the index file for TP HW 1
 -->
 
@@ -15,14 +15,9 @@
     <title>ZhenLife Medical Center – Patient Registration</title>
     <link rel="stylesheet" href="Styles.css">
     <style>
-        .required-star {
-            color: red;
-            margin-left: 3px;
-        }
-        #healthValue {
-            font-weight: bold;
-            margin-left: 10px;
-        }
+        .required-star { color: red; margin-left: 3px; }
+        #healthValue { font-weight: bold; margin-left: 10px; }
+        .error-msg { color: #b00020; font-size: 0.9rem; margin-top: 4px; }
     </style>
 </head>
 <body>
@@ -40,183 +35,189 @@
             <h2>Patient Registration</h2>
         </header>
 
-        <!-- Name -->
-        <div class="form">
-            <label for="firstname">First Name:<span class="required-star">*</span></label>
-            <input type="text" id="firstname" name="firstname" maxlength="30" required>
-        </div>
-        <div class="form">
-            <label for="mi">Middle Initial:</label>
-            <input type="text" id="mi" name="mi" maxlength="1">
-        </div>
-        <div class="form">
-            <label for="lastname">Last Name:<span class="required-star">*</span></label>
-            <input type="text" id="lastname" name="lastname" maxlength="30" required>
-        </div>
-
-        <!-- DOB, SSN, Gender -->
-        <div class="form">
-            <label for="dob">Date of Birth:<span class="required-star">*</span></label>
-            <input 
-                type="date" 
-                id="dob" 
-                name="dob" 
-                required
-                min="1900-01-01" 
-                max="">
-        </div>
-        <div class="form">
-            <label for="ssn">SSN:<span class="required-star">*</span></label>
-            <input 
-                type="password" 
-                id="ssn" 
-                name="ssn" 
-                maxlength="9" 
-                inputmode="numeric" 
-                pattern="\d{9}" 
-                title="SSN must be exactly 9 digits" 
-                required>
-        </div>
-        <div class="form">
-            <label>Gender:<span class="required-star">*</span></label>
-            <label><input type="radio" name="gender" value="Male" required> Male</label>
-            <label><input type="radio" name="gender" value="Female"> Female</label>
-            <label><input type="radio" name="gender" value="Other"> Other</label>
-        </div>
-
-        <!-- Contact Info -->
-        <div class="form">
-            <label for="email">Email:<span class="required-star">*</span></label>
-            <input type="email" id="email" name="email" placeholder="example@example.com" required>
-        </div>
-        <div class="form">
-            <label for="phone">Phone #:<span class="required-star">*</span></label>
-            <input type="tel" id="phone" name="phone" placeholder="(123)456-7890" required>
-        </div>
-
-        <!-- Address -->
-        <div class="form">
-            <label for="address1">Address Line 1:<span class="required-star">*</span></label>
-            <input type="text" id="address1" name="address1" maxlength="30" required>
-        </div>
-        <div class="form">
-            <label for="address2">Address Line 2:</label>
-            <input type="text" id="address2" name="address2" maxlength="30">
-        </div>
-        <div class="form">
-            <label for="city">City:<span class="required-star">*</span></label>
-            <input type="text" id="city" name="city" maxlength="30" required>
-        </div>
-        <div class="form">
-            <label for="state">State:<span class="required-star">*</span></label>
-            <select id="state" name="state" required>
-                <option value="">Select State</option>
-                <option value="AL">Alabama</option>
-                <option value="AK">Alaska</option>
-                <option value="AZ">Arizona</option>
-                <option value="AR">Arkansas</option>
-                <option value="CA">California</option>
-                <option value="CO">Colorado</option>
-                <option value="CT">Connecticut</option>
-                <option value="DE">Delaware</option>
-                <option value="DC">District of Columbia</option>
-                <option value="FL">Florida</option>
-                <option value="GA">Georgia</option>
-                <option value="HI">Hawaii</option>
-                <option value="ID">Idaho</option>
-                <option value="IL">Illinois</option>
-                <option value="IN">Indiana</option>
-                <option value="IA">Iowa</option>
-                <option value="KS">Kansas</option>
-                <option value="KY">Kentucky</option>
-                <option value="LA">Louisiana</option>
-                <option value="ME">Maine</option>
-                <option value="MD">Maryland</option>
-                <option value="MA">Massachusetts</option>
-                <option value="MI">Michigan</option>
-                <option value="MN">Minnesota</option>
-                <option value="MS">Mississippi</option>
-                <option value="MO">Missouri</option>
-                <option value="MT">Montana</option>
-                <option value="NE">Nebraska</option>
-                <option value="NV">Nevada</option>
-                <option value="NH">New Hampshire</option>
-                <option value="NJ">New Jersey</option>
-                <option value="NM">New Mexico</option>
-                <option value="NY">New York</option>
-                <option value="NC">North Carolina</option>
-                <option value="ND">North Dakota</option>
-                <option value="OH">Ohio</option>
-                <option value="OK">Oklahoma</option>
-                <option value="OR">Oregon</option>
-                <option value="PA">Pennsylvania</option>
-                <option value="RI">Rhode Island</option>
-                <option value="SC">South Carolina</option>
-                <option value="SD">South Dakota</option>
-                <option value="TN">Tennessee</option>
-                <option value="TX">Texas</option>
-                <option value="UT">Utah</option>
-                <option value="VT">Vermont</option>
-                <option value="VA">Virginia</option>
-                <option value="WA">Washington</option>
-                <option value="WV">West Virginia</option>
-                <option value="WI">Wisconsin</option>
-                <option value="WY">Wyoming</option>
-                <option value="PR">Puerto Rico</option>
-            </select>
-        </div>
-        <div class="form">
-            <label for="zip">Zip Code:<span class="required-star">*</span></label>
-            <input type="text" id="zip" name="zip" maxlength="10" placeholder="12345" required>
-        </div>
-
-        <!-- Medical Info -->
-        <div class="form">
-            <label for="health">How are you feeling today? (1-10):</label>
-            <input type="range" id="health" name="health" min="1" max="10" value="5" oninput="healthValue.textContent = this.value">
-            <span id="healthValue">5</span>
-        </div>
-        <div class="form">
-            <label>Medical History (check all that apply):</label>
-            <label><input type="checkbox" name="history" value="Diabetes"> Diabetes</label>
-            <label><input type="checkbox" name="history" value="Asthma"> Asthma</label>
-            <label><input type="checkbox" name="history" value="Heart Disease"> Heart Disease</label>
-            <label><input type="checkbox" name="history" value="Stroke"> Stroke</label>
-            <label><input type="checkbox" name="history" value="Cancer"> Cancer</label>
-        </div>
-        <div class="form">
-            <label for="notes">Symptoms/Notes:</label>
-            <textarea id="notes" name="notes" rows="3" cols="50"></textarea>
-        </div>
-        <div class="form">
-            <label>Vaccinated?<span class="required-star">*</span></label>
-            <label><input type="radio" name="vaccinated" value="Yes"> Yes</label>
-            <label><input type="radio" name="vaccinated" value="No"> No</label>
-        </div>
-        <div class="form">
-            <label>Insurance?<span class="required-star">*</span></label>
-            <label><input type="radio" name="insurance" value="Yes"> Yes</label>
-            <label><input type="radio" name="insurance" value="No"> No</label>
-        </div>
-
-        <!-- Login -->
-        <div class="form">
-            <label for="userid">User ID:<span class="required-star">*</span></label>
-            <input type="text" id="userid" name="userid" maxlength="20" required>
-        </div>
-        <div class="form">
-            <label for="password">Password:<span class="required-star">*</span></label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div class="form">
-            <label for="confirm">Confirm Password:<span class="required-star">*</span></label>
-            <input type="password" id="confirm" name="confirm" required>
-        </div>
-
-        <!-- Buttons -->
-        <form action="TYpage.html">
+        <!-- Wrap everything in ONE form so required/patterns work -->
+        <form id="patientForm" action="TYpage.html" method="get" novalidate>
+            <!-- Name -->
             <div class="form">
-                <button type="submit">Submit</button>
+                <label for="firstname">First Name:<span class="required-star">*</span></label>
+                <input type="text" id="firstname" name="firstname" maxlength="30" required>
+            </div>
+            <div class="form">
+                <label for="mi">Middle Initial:</label>
+                <input type="text" id="mi" name="mi" maxlength="1">
+            </div>
+            <div class="form">
+                <label for="lastname">Last Name:<span class="required-star">*</span></label>
+                <input type="text" id="lastname" name="lastname" maxlength="30" required>
+            </div>
+
+            <!-- DOB, SSN, Gender -->
+            <div class="form">
+                <label for="dob">Date of Birth:<span class="required-star">*</span></label>
+                <input 
+                    type="date" 
+                    id="dob" 
+                    name="dob" 
+                    required
+                    min="1900-01-01" 
+                    max="">
+            </div>
+            <div class="form">
+                <label for="ssn">SSN:<span class="required-star">*</span></label>
+                <input 
+                    type="password" 
+                    id="ssn" 
+                    name="ssn" 
+                    maxlength="9" 
+                    inputmode="numeric" 
+                    pattern="\d{9}" 
+                    title="SSN must be exactly 9 digits"
+                    required>
+            </div>
+            <div class="form">
+                <label>Gender:<span class="required-star">*</span></label>
+                <label><input type="radio" name="gender" value="Male" required> Male</label>
+                <label><input type="radio" name="gender" value="Female"> Female</label>
+                <label><input type="radio" name="gender" value="Other"> Other</label>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="form">
+                <label for="email">Email:<span class="required-star">*</span></label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="name@domain.tld" 
+                    required
+                    pattern="^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$"
+                    title="Use a valid email like name@domain.tld">
+                <div id="emailError" class="error-msg" style="display:none;">Please enter a valid email like name@domain.tld</div>
+            </div>
+            <div class="form">
+                <label for="phone">Phone #:<span class="required-star">*</span></label>
+                <input type="tel" id="phone" name="phone" placeholder="(123)456-7890" required>
+            </div>
+
+            <!-- Address -->
+            <div class="form">
+                <label for="address1">Address Line 1:<span class="required-star">*</span></label>
+                <input type="text" id="address1" name="address1" maxlength="30" required>
+            </div>
+            <div class="form">
+                <label for="address2">Address Line 2:</label>
+                <input type="text" id="address2" name="address2" maxlength="30">
+            </div>
+            <div class="form">
+                <label for="city">City:<span class="required-star">*</span></label>
+                <input type="text" id="city" name="city" maxlength="30" required>
+            </div>
+            <div class="form">
+                <label for="state">State:<span class="required-star">*</span></label>
+                <select id="state" name="state" required>
+                    <option value="">Select State</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="DC">District of Columbia</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                    <option value="PR">Puerto Rico</option>
+                </select>
+            </div>
+            <div class="form">
+                <label for="zip">Zip Code:<span class="required-star">*</span></label>
+                <input type="text" id="zip" name="zip" maxlength="10" placeholder="12345" required>
+            </div>
+
+            <!-- Medical Info -->
+            <div class="form">
+                <label for="health">How are you feeling today? (1-10):</label>
+                <input type="range" id="health" name="health" min="1" max="10" value="5" oninput="healthValue.textContent = this.value">
+                <span id="healthValue">5</span>
+            </div>
+            <div class="form">
+                <label>Medical History (check all that apply):</label>
+                <label><input type="checkbox" name="history" value="Diabetes"> Diabetes</label>
+                <label><input type="checkbox" name="history" value="Asthma"> Asthma</label>
+                <label><input type="checkbox" name="history" value="Heart Disease"> Heart Disease</label>
+                <label><input type="checkbox" name="history" value="Stroke"> Stroke</label>
+                <label><input type="checkbox" name="history" value="Cancer"> Cancer</label>
+            </div>
+            <div class="form">
+                <label>COVID-19 booster in the last 12 months?<span class="required-star">*</span></label>
+                <label><input type="radio" name="booster12m" value="Yes" required> Yes</label>
+                <label><input type="radio" name="booster12m" value="No"> No</label>
+            </div>
+            <div class="form">
+                <label>Insurance?<span class="required-star">*</span></label>
+                <label><input type="radio" name="insurance" value="Yes" required> Yes</label>
+                <label><input type="radio" name="insurance" value="No"> No</label>
+            </div>
+
+            <!-- Login -->
+            <div class="form">
+                <label for="userid">User ID:<span class="required-star">*</span></label>
+                <input type="text" id="userid" name="userid" maxlength="20" required>
+            </div>
+            <div class="form">
+                <label for="password">Password:<span class="required-star">*</span></label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form">
+                <label for="confirm">Confirm Password:<span class="required-star">*</span></label>
+                <input type="password" id="confirm" name="confirm" required>
+                <div id="pwError" class="error-msg" style="display:none;">Passwords must match.</div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form">
+                <button id="submitBtn" type="submit" disabled>Submit</button>
                 <button type="reset">Clear and Start Over</button>
             </div>
         </form>
@@ -251,6 +252,47 @@
         ssn.addEventListener('input', function () {
             this.value = this.value.replace(/\D/g, '').slice(0, 9);
         });
+
+        // ---- Live validation: email + matching passwords; toggle submit ----
+        const form = document.getElementById('patientForm');
+        const email = document.getElementById('email');
+        const emailError = document.getElementById('emailError');
+        const pw = document.getElementById('password');
+        const pw2 = document.getElementById('confirm');
+        const pwError = document.getElementById('pwError');
+        const submitBtn = document.getElementById('submitBtn');
+
+        function emailsOkay() {
+          const ok = /^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(email.value);
+          emailError.style.display = ok ? 'none' : 'block';
+          return ok;
+        }
+
+        function passwordsMatch() {
+          const match = pw.value !== '' && pw.value === pw2.value;
+          pwError.style.display = match ? 'none' : 'block';
+          return match;
+        }
+
+        function updateSubmitState() {
+          const allGood = form.checkValidity() && emailsOkay() && passwordsMatch();
+          submitBtn.disabled = !allGood;
+        }
+
+        email.addEventListener('input', () => { emailsOkay(); updateSubmitState(); });
+        pw.addEventListener('input', updateSubmitState);
+        pw2.addEventListener('input', updateSubmitState);
+
+        // Prevent submit if JS catches anything out of sync
+        form.addEventListener('submit', (e) => {
+          if (!emailsOkay() || !passwordsMatch() || !form.checkValidity()) {
+            e.preventDefault();
+            updateSubmitState();
+          }
+        });
+
+        // Initialize state on load
+        updateSubmitState();
     </script>
 </body>
 </html>
