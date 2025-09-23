@@ -3,7 +3,165 @@ Program name: PTF
 Author: Ivan Zheng
 Date Created: 09/23/25
 Date Last edited: 09/24/25
-Version: 1.0
+Version: 1.1
 Descirption: This is the index file for TP HW 1
 -->
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZhenLife Medical Center – Patient Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  
+    <!-- Header -->
+    <div class="header-container">
+        <img src="Zhenlife.png" width="100" height="100" alt="ZhenLife Logo">
+        <h1>ZhenLife Medical Center</h1>
+        <p id="datetime"></p>
+    </div>
+
+    <!-- Form -->
+    <div class="container">
+        <header>
+            <h2>Patient Registration</h2>
+        </header>
+
+        <!-- Name -->
+        <div class="form">
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" name="firstname" maxlength="30" required>
+        </div>
+        <div class="form">
+            <label for="mi">Middle Initial:</label>
+            <input type="text" id="mi" name="mi" maxlength="1">
+        </div>
+        <div class="form">
+            <label for="lastname">Last Name:</label>
+            <input type="text" id="lastname" name="lastname" maxlength="30" required>
+        </div>
+
+        <!-- DOB, SSN, Gender -->
+        <div class="form">
+            <label for="dob">Date of Birth:</label>
+            <input type="text" id="dob" name="dob" placeholder="MM/DD/YYYY" required>
+        </div>
+        <div class="form">
+            <label for="ssn">SSN:</label>
+            <input type="password" id="ssn" name="ssn" maxlength="11" placeholder="***-**-****" required>
+        </div>
+        <div class="form">
+            <label>Gender:</label>
+            <label><input type="radio" name="gender" value="Male" required> Male</label>
+            <label><input type="radio" name="gender" value="Female"> Female</label>
+            <label><input type="radio" name="gender" value="Other"> Other</label>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="example@example.com" required>
+        </div>
+        <div class="form">
+            <label for="phone">Phone #:</label>
+            <input type="tel" id="phone" name="phone" placeholder="(123)456-7890" required>
+        </div>
+
+        <!-- Address -->
+        <div class="form">
+            <label for="address1">Address Line 1:</label>
+            <input type="text" id="address1" name="address1" maxlength="30" required>
+        </div>
+        <div class="form">
+            <label for="address2">Address Line 2:</label>
+            <input type="text" id="address2" name="address2" maxlength="30">
+        </div>
+        <div class="form">
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" maxlength="30" required>
+        </div>
+        <div class="form">
+            <label for="state">State:</label>
+            <select id="state" name="state" required>
+                <option value="">Select State</option>
+                <option value="TX">Texas</option>
+                <option value="CA">California</option>
+                <option value="NY">New York</option>
+                <!-- TODO: add all states + DC + PR -->
+            </select>
+        </div>
+        <div class="form">
+            <label for="zip">Zip Code:</label>
+            <input type="text" id="zip" name="zip" maxlength="10" placeholder="12345" required>
+        </div>
+
+        <!-- Medical Info -->
+        <div class="form">
+            <label for="health">How are you feeling today? (1-10):</label>
+            <input type="range" id="health" name="health" min="1" max="10">
+        </div>
+        <div class="form">
+            <label>Medical History (check all that apply):</label>
+            <label><input type="checkbox" name="history" value="Diabetes"> Diabetes</label>
+            <label><input type="checkbox" name="history" value="Asthma"> Asthma</label>
+            <label><input type="checkbox" name="history" value="Heart Disease"> Heart Disease</label>
+            <label><input type="checkbox" name="history" value="Stroke"> Stroke</label>
+            <label><input type="checkbox" name="history" value="Cancer"> Cancer</label>
+        </div>
+        <div class="form">
+            <label for="notes">Symptoms/Notes:</label>
+            <textarea id="notes" name="notes" rows="3" cols="50"></textarea>
+        </div>
+        <div class="form">
+            <label>Vaccinated?</label>
+            <label><input type="radio" name="vaccinated" value="Yes"> Yes</label>
+            <label><input type="radio" name="vaccinated" value="No"> No</label>
+        </div>
+        <div class="form">
+            <label>Insurance?</label>
+            <label><input type="radio" name="insurance" value="Yes"> Yes</label>
+            <label><input type="radio" name="insurance" value="No"> No</label>
+        </div>
+
+        <!-- Login -->
+        <div class="form">
+            <label for="userid">User ID:</label>
+            <input type="text" id="userid" name="userid" maxlength="20" required>
+        </div>
+        <div class="form">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form">
+            <label for="confirm">Confirm Password:</label>
+            <input type="password" id="confirm" name="confirm" required>
+        </div>
+
+        <!-- Buttons -->
+        <form action="TYpage.html">
+            <div class="form">
+                <button type="submit">Submit</button>
+                <button type="reset">Clear and Start Over</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>ZhenLife Medical Center © 2025 | 
+        <a href="#">Privacy Policy</a> | 
+        <a href="#">Contact Us</a></p>
+    </footer>
+
+    <!-- JS for Date -->
+    <script>
+        const dateElement = document.getElementById('datetime');
+        const today = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateElement.textContent = today.toLocaleDateString('en-US', options);
+    </script>
+</body>
+</html>
