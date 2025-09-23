@@ -1,20 +1,18 @@
 /*
-  Program name: styles.css
+  Program name: Styles.css
   Author: Ivan Zheng
-  Date Created: 09-23-2025
-  Version: 1.0
+  Date Created: 09/23/2025
+  Version: 1.1
   Description: Styles for ZhenLife Medical Center Patient Registration Form
 */
 
-/* Tag selector */
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #f0f8ff;   /* light blue, non-default */
+  background-color: #f0f8ff;  
   color: #222;
 }
 
-/* ID selector */
 #logo {
   border-radius: 8px;
 }
@@ -24,7 +22,6 @@ body {
   font-size: 14px;
 }
 
-/* Class selectors */
 .header-container {
   background-color: #0f221a;
   color: white;
@@ -53,7 +50,6 @@ body {
   font-weight: bold;
 }
 
-/* Inputs */
 input[type="text"],
 input[type="password"],
 input[type="email"],
@@ -71,13 +67,11 @@ textarea {
   resize: vertical;
 }
 
-/* Name selector */
 input[name="userid"] {
   background-color: #fafafa;
   border: 1px solid #666;
 }
 
-/* Buttons */
 button {
   padding: 10px 15px;
   margin-right: 10px;
@@ -96,7 +90,6 @@ button:hover {
   opacity: 0.9;
 }
 
-/* Footer */
 footer {
   text-align: center;
   padding: 15px;
@@ -111,6 +104,6 @@ footer a {
 }
 
 footer a:visited {
-  color: #4caf50; /* visited link color */
+  color: #4caf50; 
 }
 
