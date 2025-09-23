@@ -3,7 +3,7 @@
     Author: Ivan Zheng
     Date Created: 09/23/25
     Date Last edited: 09/24/25
-    Version: 1.7
+    Version: 1.8
     Description: This is the index file for TP HW 1
 -->
 
@@ -18,6 +18,31 @@
         .required-star { color: red; margin-left: 3px; }
         #healthValue { font-weight: bold; margin-left: 10px; }
         .error-msg { color: #b00020; font-size: 0.9rem; margin-top: 4px; }
+
+        /* Error summary (sticky at top of form) */
+        .error-summary {
+          border: 1px solid #ffb3b3;
+          background: #ffecec;
+          color: #8a1f1f;
+          padding: 12px 16px;
+          border-radius: 8px;
+          margin: 0 0 16px 0;
+        }
+        .error-summary h3 {
+          margin: 0 0 6px 0;
+          font-size: 1.05rem;
+        }
+        .error-summary ul { margin: 0 0 0 18px; }
+        .error-summary a {
+          color: #8a1f1f;
+          text-decoration: underline;
+        }
+
+        /* Subtle red outline for invalid fields */
+        input:invalid, select:invalid, textarea:invalid {
+          outline: 2px solid rgba(176, 0, 32, 0.25);
+          outline-offset: 1px;
+        }
     </style>
 </head>
 <body>
@@ -34,6 +59,12 @@
         <header>
             <h2>Patient Registration</h2>
         </header>
+
+        <!-- Error summary (hidden until needed) -->
+        <div id="errorSummary" class="error-summary" role="alert" aria-live="polite" style="display:none;">
+          <h3>Please fix the following before submitting:</h3>
+          <ul id="errorList"></ul>
+        </div>
 
         <form id="patientForm" action="TYpage.html" method="get" novalidate>
             <!-- Name -->
@@ -59,6 +90,7 @@
                 <label for="ssn">SSN:<span class="required-star">*</span></label>
                 <input type="password" id="ssn" name="ssn" maxlength="9" inputmode="numeric" 
                        pattern="\d{9}" title="SSN must be exactly 9 digits" required>
+                <div id="ssnError" class="error-msg" style="display:none;">SSN must be exactly 9 digits.</div>
             </div>
             <div class="form">
                 <label>Gender:<span class="required-star">*</span></label>
@@ -214,13 +246,12 @@
 
     <!-- JS -->
     <script>
-        // Dynamic date in banner
+        
         const dateElement = document.getElementById('datetime');
         const today = new Date();
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         dateElement.textContent = today.toLocaleDateString('en-US', options);
 
-        // Set DOB max to today (prevents future dates)
         const dobField = document.getElementById('dob');
         if (dobField) {
           const yyyy = today.getFullYear();
@@ -229,13 +260,13 @@
           dobField.max = `${yyyy}-${mm}-${dd}`;
         }
 
-        // SSN: numeric-only, max 9 digits
         const ssn = document.getElementById('ssn');
+        const ssnError = document.getElementById('ssnError');
         ssn.addEventListener('input', function () {
             this.value = this.value.replace(/\D/g, '').slice(0, 9);
+            ssnError.style.display = (this.value.length === 9) ? 'none' : 'block';
         });
 
-        // Email + Password live validation
         const form = document.getElementById('patientForm');
         const email = document.getElementById('email');
         const emailError = document.getElementById('emailError');
@@ -249,26 +280,91 @@
           emailError.style.display = ok ? 'none' : 'block';
           return ok;
         }
-
         function passwordsMatch() {
           const match = pw.value !== '' && pw.value === pw2.value;
           pwError.style.display = match ? 'none' : 'block';
           return match;
         }
 
+        const errorSummary = document.getElementById('errorSummary');
+        const errorList = document.getElementById('errorList');
+
+        function labelFor(id) {
+          const lbl = document.querySelector(`label[for="${id}"]`);
+          if (!lbl) return null;
+
+          return lbl.textContent.replace('*','').trim().replace(/:$/, '');
+        }
+
+        function buildErrorSummary() {
+          const fields = Array.from(form.elements).filter(el => el.willValidate !== undefined);
+          const problems = [];
+
+          // force native messages to be ready
+          fields.forEach(el => el.setCustomValidity(''));
+
+          // Custom validity hooks
+          if (!emailsOkay() && email.value !== '') {
+            email.setCustomValidity('Please enter a valid email like name@domain.tld.');
+          } else {
+            email.setCustomValidity('');
+          }
+          if (!passwordsMatch() && (pw.value !== '' || pw2.value !== '')) {
+            pw2.setCustomValidity('Passwords must match.');
+          } else {
+            pw2.setCustomValidity('');
+          }
+          if (ssn.value.length !== 9) {
+            ssn.setCustomValidity('SSN must be exactly 9 digits.');
+          } else {
+            ssn.setCustomValidity('');
+          }
+
+          fields.forEach(el => {
+            if (!el.checkValidity()) {
+              const nice = labelFor(el.id) || el.name || 'Field';
+              const msg = el.validationMessage || 'Please correct this field.';
+              problems.push({ el, text: `${nice}: ${msg}` });
+            }
+          });
+
+          errorList.innerHTML = '';
+          if (problems.length) {
+            errorSummary.style.display = '';
+            problems.forEach(p => {
+              const li = document.createElement('li');
+              const a = document.createElement('a');
+              a.href = `#${p.el.id}`;
+              a.textContent = p.text;
+              a.addEventListener('click', e => {
+                e.preventDefault();
+                p.el.focus();
+              });
+              li.appendChild(a);
+              errorList.appendChild(li);
+            });
+          } else {
+            errorSummary.style.display = 'none';
+          }
+
+          return problems;
+        }
+
         function updateSubmitState() {
-          const allGood = form.checkValidity() && emailsOkay() && passwordsMatch();
+          const problems = buildErrorSummary();
+          const allGood = problems.length === 0 && form.checkValidity();
           submitBtn.disabled = !allGood;
         }
 
-        email.addEventListener('input', () => { emailsOkay(); updateSubmitState(); });
-        pw.addEventListener('input', updateSubmitState);
-        pw2.addEventListener('input', updateSubmitState);
+        form.addEventListener('input', updateSubmitState);
+        form.addEventListener('change', updateSubmitState);
 
         form.addEventListener('submit', (e) => {
-          if (!emailsOkay() || !passwordsMatch() || !form.checkValidity()) {
+          const problems = buildErrorSummary();
+          if (problems.length) {
             e.preventDefault();
-            updateSubmitState();
+            // focus first bad field
+            problems[0].el.focus();
           }
         });
 
