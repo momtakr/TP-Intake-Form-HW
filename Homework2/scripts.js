@@ -1,7 +1,7 @@
 /* 
   Program: script.js
   Author: Ivan Zheng
-  Version: 3.0
+  Version: 2.8
   Date: 10/22/2025
   Description: Handles validation and Review button logic for Patient Registration Form
 */
