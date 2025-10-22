@@ -176,3 +176,27 @@ footer {
 .form-table tr + tr h3.section-header {
   margin-top: 12px;
 }
+
+.page-title {
+  font-size: clamp(2.4rem, 4.2vw, 3.25rem); 
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  margin: 10px 0 12px;
+  line-height: 1.15;
+}
+
+.section-header {
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem); 
+  font-weight: 700;
+  margin: 18px 0 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(0,0,0,.15); 
+  color: #111;
+  line-height: 1.2;
+}
+
+::placeholder {
+  color: rgba(0,0,0,0.45);
+  font-style: italic;
+}
+
