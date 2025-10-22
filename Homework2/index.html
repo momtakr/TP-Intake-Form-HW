@@ -171,6 +171,15 @@
             <label><input type="radio" name="insurance" value="Unsure"> Unsure</label>
           </td>
         </tr>
+       <tr>
+          <td><label for="concerns">Any concerns you want to let the doctor know?</label></td>
+          <td>
+            <textarea id="concerns" name="concerns" rows="4" maxlength="500"
+                      placeholder="e.g., Headaches for 3 days, mild fever, sore throat"
+                      pattern='[^"]*' title='Please avoid double quotes (").'></textarea>
+            <div class="help">Optional. Max 500 characters. No double quotes (").</div>
+          </td>
+        </tr>
 
         <!-- SECTION: Account Information -->
         <tr><td colspan="2"><h3 class="section-header">Account Information</h3></td></tr>
