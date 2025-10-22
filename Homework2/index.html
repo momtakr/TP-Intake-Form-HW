@@ -1,230 +1,93 @@
 <!--
-  Program: PTF 2
-  Author: Ivan Zheng
-  Version: 2.7
-  Date: 10/22/2025
-  Description: Patient Registration with Review button
+    Program name: PTF 
+    Author: Ivan Zheng
+    Date Last edited: 10/22/25
+    Version: 2.1
+    Description: Patient Registration Form with Review button
 -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZhenLife Medical Center – Patient Registration (HW2)</title>
-  <link rel="stylesheet" href="Styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZhenLife Medical Center – Patient Registration</title>
+  <link rel="stylesheet" href="Styles.css">
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; }
+    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; letter-spacing: .2px; }
+
+    .required-star { color: red; margin-left: 3px; }
+    #healthValue { font-weight: bold; margin-left: 10px; }
+    .error-msg { color: #b00020; font-size: 0.9rem; margin-top: 4px; }
+
+    .form-table{ width:100%; border-collapse:separate; border-spacing:10px 12px; }
+    .form-table td:first-child{ width:220px; vertical-align:middle; font-weight:600; }
+    .form-table td:last-child{ width:auto; }
+    .inline-group label{ margin-right:16px; }
+
+    .form-table input[type="text"],
+    .form-table input[type="password"],
+    .form-table input[type="email"],
+    .form-table input[type="tel"],
+    .form-table select,
+    .form-table textarea {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* HW2 additions */
+    .review-pane {
+      margin-top: 16px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .review-table { width: 100%; border-collapse: collapse; }
+    .review-table th, .review-table td { border: 1px solid #ddd; padding: 6px; text-align: left; }
+    .small { font-size: 0.9rem; color: #444; }
+  </style>
 </head>
 <body>
+
+  <!-- Header -->
   <div class="header-container">
-    <img src="./Zhenlife.png" alt="Zhenlife Logo" id="logo" width="100" height="100" />
+    <img src="./Zhenlife.png" alt="Zhenlife Logo" id="logo" width="100" height="100">
     <h1>ZhenLife Medical Center</h1>
     <p id="datetime"></p>
   </div>
 
-  <div class="main-grid">
-    <!-- LEFT: FORM -->
-    <div class="container">
+  <!-- Form -->
+  <div class="container">
+    <header>
       <h2>Patient Registration</h2>
-      <form id="patientForm" action="TYpage.html" method="get" novalidate>
-        <table class="form-table">
-          <!-- Block 1: Name & Date -->
-          <tr>
-            <td><label for="firstname">First Name<span class="required-star">*</span></label></td>
-            <td>
-              <input type="text" id="firstname" name="firstname" maxlength="30" required
-                pattern="[A-Za-z'\-]{1,30}" title="1–30 letters, apostrophes, and dashes only" />
-              <span class="err" id="err_firstname"></span>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="mi">Middle Initial</label></td>
-            <td>
-              <input type="text" id="mi" name="mi" maxlength="1" pattern="[A-Za-z]?" title="Exactly 1 letter if provided" />
-              <span class="err" id="err_mi"></span>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="lastname">Last Name<span class="required-star">*</span></label></td>
-            <td>
-              <input type="text" id="lastname" name="lastname" maxlength="30" required
-                pattern="[A-Za-z'\-0-9]{1,30}" title="1–30 letters, apostrophes, dashes, and digits allowed" />
-              <span class="err" id="err_lastname"></span>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="dob">Date of Birth<span class="required-star">*</span></label></td>
-            <td>
-              <input type="date" id="dob" name="dob" required title="Cannot be in the future or more than 120 years ago" />
-              <span class="err" id="err_dob"></span>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="ssn">ID / SSN (obscured)</label></td>
-            <td>
-              <input type="password" id="ssn" name="ssn" inputmode="numeric" maxlength="9" title="Digits only; kept private" />
-              <span class="help small">Digits only; kept private</span>
-            </td>
-          </tr>
+    </header>
 
-          <!-- Block 2: Contact -->
-          <tr>
-            <td><label for="email">Email<span class="required-star">*</span></label></td>
-            <td>
-              <input type="email" id="email" name="email" placeholder="name@domain.tld" required
-                pattern="^[^\\s@]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$" title="Use name@domain.tld" />
-              <span class="err" id="err_email"></span>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="phone">Phone #<span class="required-star">*</span></label></td>
-            <td>
-              <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" required
-                pattern="^\\(\\d{3}\\) \\d{3}-\\d{4}$" title="Format: (123) 456-7890" />
-              <span class="err" id="err_phone"></span>
-            </td>
-          </tr>
+    <form id="patientForm" action="TYpage.html" method="get" novalidate>
+      <table class="form-table">
+        <!-- Name -->
+        <tr>
+          <td><label for="firstname">First Name:<span class="required-star">*</span></label></td>
+          <td><input type="text" id="firstname" name="firstname" maxlength="30" required pattern="[A-Za-z'\-]{1,30}" title="1–30 letters, apostrophes, and dashes only"></td>
+        </tr>
+        <tr>
+          <td><label for="mi">Middle Initial:</label></td>
+          <td><input type="text" id="mi" name="mi" maxlength="1"></td>
+        </tr>
+        <tr>
+          <td><label for="lastname">Last Name:<span class="required-star">*</span></label></td>
+          <td><input type="text" id="lastname" name="lastname" maxlength="30" required pattern="[A-Za-z'\-0-9]{1,30}" title="1–30 letters, apostrophes, dashes; digits allowed (e.g., 3rd)"></td>
+        </tr>
 
-          <!-- Block 3: Address -->
-          <tr>
-            <td><label for="address1">Address Line 1<span class="required-star">*</span></label></td>
-            <td>
-              <input type="text" id="address1" name="address1" maxlength="30" required pattern=".{2,30}" />
-              <span class="err" id="err_address1"></span>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="address2">Address Line 2</label></td>
-            <td>
-              <input type="text" id="address2" name="address2" maxlength="30" pattern=".{0,30}" />
-              <span class="err" id="err_address2"></span>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="city">City<span class="required-star">*</span></label></td>
-            <td>
-              <input type="text" id="city" name="city" maxlength="30" required pattern="[A-Za-z.\\-\\s]{2,30}" />
-              <span class="err" id="err_city"></span>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="state">State<span class="required-star">*</span></label></td>
-            <td>
-              <select id="state" name="state" required>
-                <option value="">Select State</option>
-                <option value="TX">Texas</option>
-                <option value="CA">California</option>
-                <option value="NY">New York</option>
-                <option value="FL">Florida</option>
-                <option value="WA">Washington</option>
-                <option value="PR">Puerto Rico</option>
-                <!-- You can expand or auto-load from states.json -->
-              </select>
-              <span class="err" id="err_state"></span>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="zip">Zip Code<span class="required-star">*</span></label></td>
-            <td>
-              <input type="text" id="zip" name="zip" maxlength="10" placeholder="12345 or 12345-6789" required
-                pattern="^\\d{5}(-\\d{4})?$" title="5 digits or ZIP+4; truncated to 5 on review" />
-              <span class="err" id="err_zip"></span>
-            </td>
-          </tr>
-
-          <!-- Block 4: Choices -->
-          <tr>
-            <td><label for="health">Health (1–10):</label></td>
-            <td>
-              <input type="range" id="health" name="health" min="1" max="10" value="5"
-                oninput="document.getElementById('healthValue').textContent=this.value" />
-              <span id="healthValue">5</span>
-            </td>
-          </tr>
-          <tr>
-            <td><label>Medical History:</label></td>
-            <td class="inline-group">
-              <label><input type="checkbox" name="history" value="Diabetes"> Diabetes</label>
-              <label><input type="checkbox" name="history" value="Asthma"> Asthma</label>
-              <label><input type="checkbox" name="history" value="Covid-19"> Covid-19</label>
-              <label><input type="checkbox" name="history" value="Heart Disease"> Heart Disease</label>
-              <label><input type="checkbox" name="history" value="Mumps"> Mumps</label>
-            </td>
-          </tr>
-          <tr>
-            <td><label>Appointment Type:</label></td>
-            <td class="inline-group">
-              <label><input type="radio" name="apptType" value="In-person"> In-person</label>
-              <label><input type="radio" name="apptType" value="Virtual"> Virtual</label>
-              <label><input type="radio" name="apptType" value="Unsure"> Unsure</label>
-            </td>
-          </tr>
-          <tr>
-            <td><label>Insurance:</label></td>
-            <td class="inline-group">
-              <label><input type="radio" name="insurance" value="Yes"> Yes</label>
-              <label><input type="radio" name="insurance" value="No"> No</label>
-              <label><input type="radio" name="insurance" value="Unsure"> Unsure</label>
-            </td>
-          </tr>
-
-          <!-- Login Section -->
-          <tr>
-            <td><label for="userid">User ID<span class="required-star">*</span></label></td>
-            <td>
-              <input type="text" id="userid" name="userid" maxlength="30" required
-                pattern="^[A-Za-z][A-Za-z0-9_-]{4,29}$"
-                title="5–30 chars; start with letter; letters/digits/_/-; no spaces; lowercased automatically" />
-              <span class="err" id="err_userid"></span>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="password">Password<span class="required-star">*</span></label></td>
-            <td>
-              <input type="password" id="password" name="password" required />
-              <span class="err" id="err_password"></span>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="confirm">Confirm Password<span class="required-star">*</span></label></td>
-            <td>
-              <input type="password" id="confirm" name="confirm" required />
-              <div id="pwError" class="error-msg" style="display:none;">
-                Passwords must match, include upper/lower/digit/special, and not include your name or userid.
-              </div>
-            </td>
-          </tr>
-
-          <!-- Buttons -->
-          <tr>
-            <td></td>
-            <td>
-              <button id="reviewBtn" type="button">Review</button>
-              <button id="submitBtn" type="submit">Submit</button>
-              <button class="secondary" type="reset">Clear and Start Over</button>
-            </td>
-          </tr>
-        </table>
-      </form>
-    </div>
-
-    <!-- RIGHT: REVIEW PANE -->
-    <aside class="review-pane" id="reviewPane">
-      <h3>PLEASE REVIEW THIS INFORMATION</h3>
-      <table class="review-table">
-        <thead>
-          <tr><th>Field</th><th>Value</th><th>Status</th></tr>
-        </thead>
-        <tbody id="reviewBody">
-          <tr><td colspan="3" class="small">Click <strong>Review</strong> to preview your entries here.</td></tr>
-        </tbody>
-      </table>
-    </aside>
-  </div>
-
-  <footer>
-    <p>ZhenLife Medical Center © 2025 | <a href="#">Privacy Policy</a> | <a href="#">Contact Us</a></p>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
-
+        <!-- DOB, SSN, Gender -->
+        <tr>
+          <td><label for="dob">Date of Birth:<span class="required-star">*</span></label></td>
+          <td><input type="date" id="dob" name="dob" required title="DOB cannot be in the future or more than 120 years ago"></td>
+        </tr>
+        <tr>
+          <td><label for="ssn">SSN:</label></td>
+          <td><input type="password" id="ssn" name="ssn" maxlength="9" inputmode="numeric"></td>
+        </tr>
+        <tr>
+          <td><label>Gender:</label></t
