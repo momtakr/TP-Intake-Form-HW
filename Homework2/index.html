@@ -2,7 +2,7 @@
     Program name: PTF
     Author: Ivan Zheng
     Date Last edited: 10/22/25
-    Version: 3.0
+    Version: 3.1
     Description: Patient Registration Form with fully functional Review button
 -->
 
@@ -330,4 +330,23 @@
 
         const p1=get('password'), p2=get('confirm');
         const pwOK=p1.length>=8 && /[A-Z]/.test(p1) && /[a-z]/.test(p1) && /\d/.test(p1) && /[!@#%^&*()\-\_=+\\\/><\.,`~]/.test(p1) && p1===p2 && !/"/.test(p1);
-        rows.push(['Password', '
+        rows.push(['Password', '********', pwOK, pwOK?'PASS':'ERROR: Invalid or mismatched password']);
+
+        // Build table
+        let html='';
+        rows.forEach(([label,value,ok,msg])=>{
+          html+=`<tr>
+            <td style="font-weight:600">${label}</td>
+            <td>${value}</td>
+            <td class="${ok?'pass':'error'}">${ok?'PASS':msg}</td>
+          </tr>`;
+        });
+        reviewBody.innerHTML = html;
+        document.getElementById('reviewPane').scrollIntoView({behavior:'smooth'});
+      }
+
+      if (reviewBtn) reviewBtn.addEventListener('click', e => { e.preventDefault(); review(); });
+    })();
+  </script>
+</body>
+</html>
