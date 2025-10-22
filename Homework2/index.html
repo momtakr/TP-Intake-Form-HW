@@ -36,6 +36,16 @@
       box-sizing: border-box;
     }
 
+    /* Section headers within the table */
+    .section-header {
+      font-size: 1.35rem;          /* larger than body, smaller than page title */
+      font-weight: 700;
+      margin: 18px 0 6px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(0,0,0,.15); /* subtle faded line */
+      color: #111;
+    }
+
     /* HW2 additions */
     .review-pane {
       margin-top: 16px;
@@ -66,6 +76,12 @@
 
     <form id="patientForm" action="TYpage.html" method="get" novalidate>
       <table class="form-table">
+
+        <!-- SECTION: Personal Information -->
+        <tr>
+          <td colspan="2"><h3 class="section-header">Personal Information</h3></td>
+        </tr>
+
         <!-- Name -->
         <tr>
           <td><label for="firstname">First Name:<span class="required-star">*</span></label></td>
@@ -98,14 +114,24 @@
           </td>
         </tr>
 
+        <!-- SECTION: Contact Information -->
+        <tr>
+          <td colspan="2"><h3 class="section-header">Contact Information</h3></td>
+        </tr>
+
         <!-- Contact Info -->
         <tr>
           <td><label for="email">Email:<span class="required-star">*</span></label></td>
-          <td><input type="email" id="email" name="email" placeholder="name@domain.tld" required pattern="^[^\\s@]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$" title="Use name@domain.tld"></td>
+          <td><input type="email" id="email" name="email" placeholder="name@domain.tld" required pattern="^[^\s@]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" title="Use name@domain.tld"></td>
         </tr>
         <tr>
           <td><label for="phone">Phone #:<span class="required-star">*</span></label></td>
-          <td><input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" required pattern="^\\(\\d{3}\\) \\d{3}-\\d{4}$" title="Format: (123) 456-7890"></td>
+          <td><input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" required pattern="^\(\d{3}\) \d{3}-\d{4}$" title="Format: (123) 456-7890"></td>
+        </tr>
+
+        <!-- SECTION: Address -->
+        <tr>
+          <td colspan="2"><h3 class="section-header">Address</h3></td>
         </tr>
 
         <!-- Address -->
@@ -119,7 +145,7 @@
         </tr>
         <tr>
           <td><label for="city">City:<span class="required-star">*</span></label></td>
-          <td><input type="text" id="city" name="city" maxlength="30" required pattern="[A-Za-z.\\-\\s]{2,30}" title="2–30 letters/spaces"></td>
+          <td><input type="text" id="city" name="city" maxlength="30" required pattern="[A-Za-z.\-\s]{2,30}" title="2–30 letters/spaces"></td>
         </tr>
         <tr>
           <td><label for="state">State:<span class="required-star">*</span></label></td>
@@ -183,7 +209,12 @@
         </tr>
         <tr>
           <td><label for="zip">Zip Code:<span class="required-star">*</span></label></td>
-          <td><input type="text" id="zip" name="zip" maxlength="10" placeholder="12345 or 12345-6789" required pattern="^\\d{5}(-\\d{4})?$" title="5 digits or ZIP+4; truncated to 5 on review"></td>
+          <td><input type="text" id="zip" name="zip" maxlength="10" placeholder="12345 or 12345-6789" required pattern="^\d{5}(-\d{4})?$" title="5 digits or ZIP+4; truncated to 5 on review"></td>
+        </tr>
+
+        <!-- SECTION: Health Information -->
+        <tr>
+          <td colspan="2"><h3 class="section-header">Health Information</h3></td>
         </tr>
 
         <!-- Medical Info -->
@@ -218,6 +249,11 @@
             <label><input type="radio" name="insurance" value="No"> No</label>
             <label><input type="radio" name="insurance" value="Unsure"> Unsure</label>
           </td>
+        </tr>
+
+        <!-- SECTION: Account Information -->
+        <tr>
+          <td colspan="2"><h3 class="section-header">Account Information</h3></td>
         </tr>
 
         <!-- Login -->
@@ -290,14 +326,14 @@
     const ssn = document.getElementById('ssn');
     if (ssn) {
       ssn.addEventListener('input', function () {
-        this.value = this.value.replace(/\\D/g, '').slice(0, 9);
+        this.value = this.value.replace(/\D/g, '').slice(0, 9);
       });
     }
 
     const phone = document.getElementById('phone');
     if (phone) {
       phone.addEventListener('input', () => {
-        let v = phone.value.replace(/\\D/g, '').slice(0, 10);
+        let v = phone.value.replace(/\D/g, '').slice(0, 10);
         let out = '';
         if (v.length > 0) out = '(' + v.slice(0, Math.min(3, v.length));
         if (v.length >= 4) out += ') ' + v.slice(3, Math.min(6, v.length));
