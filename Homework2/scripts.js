@@ -120,7 +120,7 @@ if (form) {
       html+=`<tr>
         <td style="font-weight:600">${label}</td>
         <td>${value}</td>
-        <td class="${ok?'pass':'error'}">${ok?'PASS':msg}</td>
+        <td class="${ok?'pass':'error'}">${ok?'✓':msg}</td>
       </tr>`;
     });
     reviewBody.innerHTML = html;
