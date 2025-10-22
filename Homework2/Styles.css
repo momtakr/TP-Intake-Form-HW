@@ -1,1 +1,161 @@
+/*
+  Program name: Styles.css (HW2)
+  Author: Ivan Zheng
+  Date Updated: 10/22/2025
+  Version: 2.0
+  Description: Styles for ZhenLife Medical Center Patient Registration (HW2)
+*/
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f0f8ff;
+  color: #222;
+}
+
+h1, h2, h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: 0.2px;
+}
+
+#logo {
+  border-radius: 8px;
+  margin-left: 17px;
+  margin-right: 15px;
+}
+
+#datetime {
+  font-style: italic;
+  font-size: 14px;
+  margin-left: auto;
+  white-space: nowrap;
+  padding-right: 30px;
+}
+
+.header-container {
+  background-color: #0f221a;
+  color: white;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-container h1 { margin: 0; }
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 16px auto;
+  padding: 0 12px;
+}
+
+.container {
+  margin: 0;
+  padding: 16px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.form-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 10px 12px;
+}
+
+.form-table td:first-child {
+  width: 220px;
+  vertical-align: middle;
+  font-weight: 600;
+}
+
+.form-table td:last-child { width: auto; }
+
+.form-table input[type="text"],
+.form-table input[type="password"],
+.form-table input[type="email"],
+.form-table input[type="tel"],
+.form-table input[type="date"],
+.form-table select,
+.form-table textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.inline-group label { margin-right: 16px; }
+
+.required-star { color: red; margin-left: 3px; }
+
+.err, .error-msg {
+  color: #b00020;
+  font-size: 0.9rem;
+  margin-top: 4px;
+  display: block;
+  min-height: 1.2em;
+}
+
+.help {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+button {
+  padding: 10px 15px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #1c5e37;
+  color: white;
+  cursor: pointer;
+}
+
+button.secondary { background-color: #555; }
+
+button:hover { opacity: 0.9; }
+
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #0f221a;
+  color: white;
+}
+
+/* REVIEW PANE */
+.review-pane {
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.review-pane h3 { margin-top: 0; }
+
+.review-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.review-table th, .review-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
+.pill.pass { background-color: #e8f5e9; color: #1b5e20; border: 1px solid #c8e6c9; }
+.pill.fail { background-color: #ffebee; color: #b71c1c; border: 1px solid #ffcdd2; }
+
+.small { font-size: 0.85rem; color: #444; }
 
