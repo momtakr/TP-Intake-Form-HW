@@ -87,7 +87,8 @@
         </tr>
         <tr>
           <td><label for="ssn">SSN:</label></td>
-          <td><input type="password" id="ssn" name="ssn" maxlength="9" inputmode="numeric"></td>
+          <input type="password" id="ssn" name="ssn" maxlength="9" inputmode="numeric"
+               required pattern="\d{9}" title="Enter 9 digits (numbers only)">
         </tr>
         <tr>
           <td><label>Gender:</label></td>
