@@ -76,7 +76,7 @@ if (form) {
   function review() {
     const rows = [];
     const fname = get('firstname'), mi = get('mi'), lname = get('lastname');
-    rows.push(['First, MI, Last Name', `${fname} ${mi} ${lname}`, !!fname && !!lname, 'ERROR: Missing name info']);
+    rows.push(['First, MI, Last Name', `${fname} ${mi} ${lname}`, !!fname && !!lname, 'Missing name info']);
 
     const dob = get('dob');
     let dobOK = true, dobMsg = '';
@@ -84,35 +84,35 @@ if (form) {
       const d = new Date(dob), today = new Date(); today.setHours(0,0,0,0);
       const min = new Date(today.getFullYear()-120, today.getMonth(), today.getDate());
       dobOK = (d<=today && d>=min);
-      if (!dobOK) dobMsg = (d>today) ? 'ERROR: Cannot be in the future' : 'ERROR: Too old';
+      if (!dobOK) dobMsg = (d>today) ? 'Cannot be in the future' : 'Too old';
     } else { dobOK = false; dobMsg = 'ERROR: Missing DOB'; }
     rows.push(['Date of Birth', dob || '(none)', dobOK, dobMsg]);
 
     const ssn = get('ssn');
     const ssnOK = /^\d{9}$/.test(ssn);
-    rows.push(['SSN', ssnOK ? '*********' : ssn, ssnOK, ssnOK ? 'PASS' : 'ERROR: Must be 9 digits']);
+    rows.push(['SSN', ssnOK ? '*********' : ssn, ssnOK, ssnOK ? '✓' : 'Must be 9 digits']);
 
     const email = get('email');
     const emailOK = /.+@.+\..+/.test(email);
-    rows.push(['Email', email, emailOK, emailOK ? 'PASS' : 'ERROR: Invalid email']);
+    rows.push(['Email', email, emailOK, emailOK ? '✓' : 'Invalid email']);
 
     const phone = get('phone');
     const phoneOK = /^\(\d{3}\) \d{3}-\d{4}$/.test(phone);
-    rows.push(['Phone', phone, phoneOK, phoneOK ? 'PASS' : 'ERROR: Invalid phone format']);
+    rows.push(['Phone', phone, phoneOK, phoneOK ? '✓' : 'Invalid phone format']);
 
     const a1=get('address1'), a2=get('address2'), city=get('city'),
           state=(document.getElementById('state')||{}).value, zip=get('zip');
     const addrOK=a1&&city&&state&&/^\d{5}/.test(zip);
-    rows.push(['Address', `${a1}<br>${a2}<br>${city}, ${state} ${zip}`, addrOK, addrOK?'PASS':'ERROR: Missing or invalid address']);
+    rows.push(['Address', `${a1}<br>${a2}<br>${city}, ${state} ${zip}`, addrOK, addrOK?'✓':' Missing or invalid address']);
 
     const uid = get('userid').toLowerCase();
     const uidOK = /^[a-z][a-z0-9_-]{4,29}$/i.test(uid);
-    rows.push(['User ID', uid, uidOK, uidOK?'PASS':'ERROR: Invalid User ID']);
+    rows.push(['User ID', uid, uidOK, uidOK?'✓':'Invalid User ID']);
 
     const p1=get('password'), p2=get('confirm');
     const pwOK=p1.length>=8 && /[A-Z]/.test(p1) && /[a-z]/.test(p1) && /\d/.test(p1) &&
                /[!@#%^&*()\-\_=+\\\/><\.,`~]/.test(p1) && p1===p2 && !/"/.test(p1);
-    rows.push(['Password', '********', pwOK, pwOK?'PASS':'ERROR: Invalid or mismatched password']);
+    rows.push(['Password', '********', pwOK, pwOK?'✓':'Invalid or mismatched password']);
 
     // Build table
     let html='';
