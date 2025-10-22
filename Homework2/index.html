@@ -2,7 +2,7 @@
     Program name: PTF
     Author: Ivan Zheng
     Date Last edited: 10/22/25
-    Version: 2.0
+    Version: 2.5
     Description: Patient Registration Form with Review button
 -->
 
@@ -14,49 +14,12 @@
   <title>ZhenLife Medical Center – Patient Registration</title>
   <link rel="stylesheet" href="Styles.css">
   <style>
-    body { font-family: Arial, Helvetica, sans-serif; }
-    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; letter-spacing: .2px; }
-
-    .required-star { color: red; margin-left: 3px; }
-    #healthValue { font-weight: bold; margin-left: 10px; }
-    .error-msg { color: #b00020; font-size: 0.9rem; margin-top: 4px; }
-
-    .form-table{ width:100%; border-collapse:separate; border-spacing:10px 12px; }
-    .form-table td:first-child{ width:220px; vertical-align:middle; font-weight:600; }
-    .form-table td:last-child{ width:auto; }
-    .inline-group label{ margin-right:16px; }
-
-    .form-table input[type="text"],
-    .form-table input[type="password"],
-    .form-table input[type="email"],
-    .form-table input[type="tel"],
-    .form-table select,
-    .form-table textarea {
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    /* Section headers within the table */
-    .section-header {
-      font-size: 1.35rem;          /* larger than body, smaller than page title */
-      font-weight: 700;
-      margin: 18px 0 6px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid rgba(0,0,0,.15); /* subtle faded line */
-      color: #111;
-    }
-
-    /* HW2 additions */
-    .review-pane {
-      margin-top: 16px;
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 12px;
-    }
-    .review-table { width: 100%; border-collapse: collapse; }
-    .review-table th, .review-table td { border: 1px solid #ddd; padding: 6px; text-align: left; }
-    .small { font-size: 0.9rem; color: #444; }
+    /* keep only tiny extras here, most styles are in Styles.css */
+    .err, .error-msg { color: #b00020; font-size: 0.9rem; margin-top: 4px; min-height: 1.2em; }
+    .review-pane { margin-top: 16px; background:#fff; border:1px solid #ccc; border-radius:8px; padding:12px; }
+    .review-table { width:100%; border-collapse:collapse; }
+    .review-table th, .review-table td { border:1px solid #ddd; padding:6px; text-align:left; }
+    .small { font-size: 0.9rem; color:#444; }
   </style>
 </head>
 <body>
@@ -71,7 +34,7 @@
   <!-- Form -->
   <div class="container">
     <header>
-      <h2>Patient Registration</h2>
+      <h2 class="page-title">Patient Registration</h2>
     </header>
 
     <form id="patientForm" action="TYpage.html" method="get" novalidate>
@@ -85,15 +48,19 @@
         <!-- Name -->
         <tr>
           <td><label for="firstname">First Name:<span class="required-star">*</span></label></td>
-          <td><input type="text" id="firstname" name="firstname" maxlength="30" required pattern="[A-Za-z'\-]{1,30}" title="1–30 letters, apostrophes, and dashes only"></td>
+          <td><input type="text" id="firstname" name="firstname" maxlength="30" required
+                     pattern="[A-Za-z'\-]{1,30}" placeholder="e.g. John"
+                     title="1–30 letters, apostrophes, and dashes only"></td>
         </tr>
         <tr>
           <td><label for="mi">Middle Initial:</label></td>
-          <td><input type="text" id="mi" name="mi" maxlength="1"></td>
+          <td><input type="text" id="mi" name="mi" maxlength="1" placeholder="M"></td>
         </tr>
         <tr>
           <td><label for="lastname">Last Name:<span class="required-star">*</span></label></td>
-          <td><input type="text" id="lastname" name="lastname" maxlength="30" required pattern="[A-Za-z'\-0-9]{1,30}" title="1–30 letters, apostrophes, dashes; digits allowed (e.g., 3rd)"></td>
+          <td><input type="text" id="lastname" name="lastname" maxlength="30" required
+                     pattern="[A-Za-z'\-0-9]{1,30}" placeholder="e.g. Doe"
+                     title="1–30 letters, apostrophes, dashes; digits allowed (e.g., 3rd)"></td>
         </tr>
 
         <!-- DOB, SSN, Gender -->
@@ -103,7 +70,8 @@
         </tr>
         <tr>
           <td><label for="ssn">SSN:<span class="required-star">*</span></label></td>
-          <td><input type="password" id="ssn" name="ssn" maxlength="9" inputmode="numeric" required pattern="\d{9}" title="Enter 9 digits (numbers only)"></td>
+          <td><input type="password" id="ssn" name="ssn" maxlength="9" inputmode="numeric" required
+                     pattern="\d{9}" placeholder="123456789" title="Enter 9 digits (numbers only)"></td>
         </tr>
         <tr>
           <td><label>Gender:</label></td>
@@ -122,11 +90,13 @@
         <!-- Contact Info -->
         <tr>
           <td><label for="email">Email:<span class="required-star">*</span></label></td>
-          <td><input type="email" id="email" name="email" placeholder="name@domain.tld" required pattern="^[^\s@]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" title="Use name@domain.tld"></td>
+          <td><input type="email" id="email" name="email" placeholder="name@domain.com" required
+                     pattern="^[^\s@]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" title="Use name@domain.tld"></td>
         </tr>
         <tr>
           <td><label for="phone">Phone #:<span class="required-star">*</span></label></td>
-          <td><input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" required pattern="^\(\d{3}\) \d{3}-\d{4}$" title="Format: (123) 456-7890"></td>
+          <td><input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" required
+                     pattern="^\(\d{3}\) \d{3}-\d{4}$" title="Format: (123) 456-7890"></td>
         </tr>
 
         <!-- SECTION: Address -->
@@ -137,15 +107,18 @@
         <!-- Address -->
         <tr>
           <td><label for="address1">Address Line 1:<span class="required-star">*</span></label></td>
-          <td><input type="text" id="address1" name="address1" maxlength="30" required pattern=".{2,30}" title="2–30 characters"></td>
+          <td><input type="text" id="address1" name="address1" maxlength="30" required
+                     pattern=".{2,30}" placeholder="123 Main St" title="2–30 characters"></td>
         </tr>
         <tr>
           <td><label for="address2">Address Line 2:</label></td>
-          <td><input type="text" id="address2" name="address2" maxlength="30" pattern=".{0,30}"></td>
+          <td><input type="text" id="address2" name="address2" maxlength="30"
+                     pattern=".{0,30}" placeholder="Apt 2B"></td>
         </tr>
         <tr>
           <td><label for="city">City:<span class="required-star">*</span></label></td>
-          <td><input type="text" id="city" name="city" maxlength="30" required pattern="[A-Za-z.\-\s]{2,30}" title="2–30 letters/spaces"></td>
+          <td><input type="text" id="city" name="city" maxlength="30" required
+                     pattern="[A-Za-z.\-\s]{2,30}" placeholder="Houston" title="2–30 letters/spaces"></td>
         </tr>
         <tr>
           <td><label for="state">State:<span class="required-star">*</span></label></td>
@@ -209,7 +182,9 @@
         </tr>
         <tr>
           <td><label for="zip">Zip Code:<span class="required-star">*</span></label></td>
-          <td><input type="text" id="zip" name="zip" maxlength="10" placeholder="12345 or 12345-6789" required pattern="^\d{5}(-\d{4})?$" title="5 digits or ZIP+4; truncated to 5 on review"></td>
+          <td><input type="text" id="zip" name="zip" maxlength="10" required
+                     pattern="^\d{5}(-\d{4})?$" placeholder="77002 or 77002-1234"
+                     title="5 digits or ZIP+4; truncated to 5 on review"></td>
         </tr>
 
         <!-- SECTION: Health Information -->
@@ -259,16 +234,20 @@
         <!-- Login -->
         <tr>
           <td><label for="userid">User ID:<span class="required-star">*</span></label></td>
-          <td><input type="text" id="userid" name="userid" maxlength="30" required pattern="^[A-Za-z][A-Za-z0-9_-]{4,29}$" title="5–30 chars; start with letter; letters/digits/_/-; no spaces; lowercased automatically"></td>
+          <td><input type="text" id="userid" name="userid" maxlength="30" required
+                     pattern="^[A-Za-z][A-Za-z0-9_-]{4,29}$" placeholder="johndoe_01"
+                     title="5–30 chars; start with letter; letters/digits/_/-; no spaces; lowercased automatically"></td>
         </tr>
         <tr>
           <td><label for="password">Password:<span class="required-star">*</span></label></td>
-          <td><input type="password" id="password" name="password" required title="8–30, include upper, lower, digit, special; no double quotes; cannot contain your name or user id"></td>
+          <td><input type="password" id="password" name="password" required
+                     placeholder="At least 8 characters"
+                     title="8–30, include upper, lower, digit, special; no double quotes; cannot contain your name or user id"></td>
         </tr>
         <tr>
           <td><label for="confirm">Confirm Password:<span class="required-star">*</span></label></td>
           <td>
-            <input type="password" id="confirm" name="confirm" required title="Re-enter the same password">
+            <input type="password" id="confirm" name="confirm" required placeholder="Re-enter password" title="Re-enter the same password">
             <div id="pwError" class="error-msg" style="display:none;">Passwords must match.</div>
           </td>
         </tr>
