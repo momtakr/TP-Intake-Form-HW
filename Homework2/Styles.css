@@ -200,3 +200,12 @@ footer {
   font-style: italic;
 }
 
+/* Review table PASS/ERROR formatting */
+.review-table td:last-child {
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.review-table td:last-child[style*="green"] { color: #1b5e20; }
+.review-table td:last-child[style*="red"] { color: #b71c1c; }
