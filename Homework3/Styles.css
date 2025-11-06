@@ -2,7 +2,7 @@
   Program name: Styles.css 
   Author: Ivan Zheng
   Date Updated: 11/05/2025
-  Version: 1.4
+  Version: 1.5
   Description: Styles for ZhenLife Medical Center Patient Registration form
 */
 
@@ -126,19 +126,18 @@ footer {
   color: white;
 }
 
-input[type="date"]:invalid {
-  color: rgba(0,0,0,0.45);           
-}
-input[type="date"]:valid {
-  color: #000;           
-}
+input[type="date"]:invalid,
 select:invalid {
-  color: rgba(0,0,0,0.45);          
+  color: rgba(0,0,0,0.45);
 }
-select option[value=""] {
-  color: rgba(0,0,0,0.45);           
+
+input[type="date"]:valid,
 select:valid {
-  color: #000;         
+  color: #000;
+}
+
+select option[value=""] {
+  color: rgba(0,0,0,0.45);
 }
 
 ::placeholder {
