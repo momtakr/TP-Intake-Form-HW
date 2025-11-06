@@ -127,16 +127,16 @@ footer {
 }
 
 input[type="date"]:invalid {
-  color: #999;           
+  color: rgba(0,0,0,0.45);           
 }
 input[type="date"]:valid {
   color: #000;           
 }
 select:invalid {
-  color: #999;          
+  color: rgba(0,0,0,0.45);          
 }
 select option[value=""] {
-  color: #999;           
+  color: rgba(0,0,0,0.45);           
 select:valid {
   color: #000;         
 }
