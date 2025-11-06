@@ -1,9 +1,9 @@
 /* 
   Program: script.js
   Author: Ivan Zheng
-  Version: 1.5
+  Version: 1.6
   Date: 11/05/2025
-  Description: On-the-fly validation + single smart button (Review → Submit)
+  Description: On-the-fly validation + single smart button (Review → Submit) — no review pane
 */
 
 /* ====== Header date ====== */
@@ -22,10 +22,8 @@ if (dobField) {
 }
 
 /* ====== DOM refs ====== */
-const form     = document.getElementById('patientForm');
-const actionBtn= document.getElementById('actionBtn'); // single Review → Submit button
-const reviewPane = document.getElementById('reviewPane');
-const reviewBody = document.getElementById('reviewBody');
+const form      = document.getElementById('patientForm');
+const actionBtn = document.getElementById('actionBtn'); // single Review → Submit button
 
 const firstName = document.getElementById('firstname');
 const mi        = document.getElementById('mi');
@@ -103,7 +101,7 @@ if (email) {
 function vFirstName() {
   const v = firstName.value.trim();
   const ok = /^[A-Za-z'\-]{1,30}$/.test(v);
-  if (!ok) setError(firstName, 'Please enter your first name.');
+  if (!ok) setError(firstName, 'Please enter your first name (letters, apostrophes, dashes).');
   else clearError(firstName);
   return ok;
 }
@@ -111,7 +109,7 @@ function vFirstName() {
 function vMI() {
   const v = mi.value.trim();
   const ok = v === '' || /^[A-Za-z]$/.test(v);
-  if (!ok) setError(mi, 'Please enter your middle intial.');
+  if (!ok) setError(mi, 'Leave blank or enter 1 letter.');
   else clearError(mi);
   return ok;
 }
@@ -119,7 +117,7 @@ function vMI() {
 function vLastName() {
   const v = lastName.value.trim();
   const ok = /^[A-Za-z'\-]{1,30}$/.test(v);
-  if (!ok) setError(lastName, 'Please enter your last name.');
+  if (!ok) setError(lastName, 'Please enter your last name (letters, apostrophes, dashes).');
   else clearError(lastName);
   return ok;
 }
@@ -139,7 +137,7 @@ function vDOB() {
 function vSSN() {
   const raw = ssn.value.replace(/\D/g, '');
   const ok = /^\d{9}$/.test(raw);
-  if (!ok) setError(ssn, 'Please enter 9 digit ss number.');
+  if (!ok) setError(ssn, 'Enter exactly 9 digits.');
   else clearError(ssn);
   return ok;
 }
@@ -147,7 +145,7 @@ function vSSN() {
 function vEmail() {
   const v = email.value.trim().toLowerCase(); email.value = v;
   const ok = /^[^\s@]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(v);
-  if (!ok) setError(email, 'Please enter a valid email address.');
+  if (!ok) setError(email, 'Use a valid email like name@domain.tld.');
   else clearError(email);
   return ok;
 }
@@ -155,7 +153,7 @@ function vEmail() {
 function vPhone() {
   const v = phone.value;
   const ok = /^\(\d{3}\) \d{3}-\d{4}$/.test(v);
-  if (!ok) setError(phone, 'Please enter a valid phone number.');
+  if (!ok) setError(phone, 'Format must be (123) 456-7890.');
   else clearError(phone);
   return ok;
 }
@@ -163,7 +161,7 @@ function vPhone() {
 function vAddress1() {
   const v = address1.value.trim();
   const ok = /^.{2,30}$/.test(v);
-  if (!ok) setError(address1, 'Please enter a valid address.');
+  if (!ok) setError(address1, '2–30 characters.');
   else clearError(address1);
   return ok;
 }
@@ -171,7 +169,7 @@ function vAddress1() {
 function vAddress2() {
   const v = address2.value.trim();
   const ok = v === '' || /^.{2,30}$/.test(v);
-  if (!ok) setError(address2, 'Please enter a valid address.');
+  if (!ok) setError(address2, '2–30 characters or leave blank.');
   else clearError(address2);
   return ok;
 }
@@ -179,7 +177,7 @@ function vAddress2() {
 function vCity() {
   const v = city.value.trim();
   const ok = /^[A-Za-z.\-\s]{2,30}$/.test(v);
-  if (!ok) setError(city, 'Please enter a valid city.');
+  if (!ok) setError(city, '2–30 letters/spaces.');
   else clearError(city);
   return ok;
 }
@@ -193,8 +191,9 @@ function vState() {
 
 function vZip() {
   const v = zip.value.trim();
-  const ok = /^\d{5}$/.test(v);
-  if (!ok) setError(zip, '5 digits required.');
+  // Match HTML pattern: 5 digits or ZIP+4
+  const ok = /^\d{5}(-\d{4})?$/.test(v);
+  if (!ok) setError(zip, '5 digits or ZIP+4 (12345 or 12345-6789).');
   else clearError(zip);
   return ok;
 }
@@ -202,7 +201,7 @@ function vZip() {
 function vUserId() {
   const v = userId.value.trim();
   const ok = /^[A-Za-z][A-Za-z0-9_-]{4,19}$/.test(v); // 5–20, starts with letter
-  if (!ok) setError(userId, 'Start with a letter, 5+ chars, only use letters/digits/_/-.');
+  if (!ok) setError(userId, 'Start with a letter; 5–20 chars; letters/digits/_/-.');
   else clearError(userId);
   return ok;
 }
@@ -211,7 +210,7 @@ function vPassword() {
   const v = pw.value;
   const uid = userId.value.trim();
   const ok = v.length >= 8 && /[A-Z]/.test(v) && /[a-z]/.test(v) && /\d/.test(v) && (!uid || v !== uid);
-  if (!ok) setError(pw, '8+ chars with upper, lower, digit; cannot contain User ID.');
+  if (!ok) setError(pw, '8+ chars with upper, lower, digit; cannot equal User ID.');
   else clearError(pw);
   return ok;
 }
@@ -233,97 +232,47 @@ function validateAll() {
   return results.every(Boolean);
 }
 
-/* ====== Review table (PASS/ERROR) ====== */
-function ssnPretty(raw9) {
-  if (!/^\d{9}$/.test(raw9)) return '(invalid)';
-  return raw9.slice(0,3) + '-' + raw9.slice(3,5) + '-' + raw9.slice(5);
-}
-
-function statusCell(ok) {
-  const td = document.createElement('td');
-  td.textContent = ok ? 'PASS' : 'ERROR';
-  td.className = ok ? 'pass' : 'error';
-  return td;
-}
-
-function addRow(label, value, ok) {
-  const tr = document.createElement('tr');
-  const td1 = document.createElement('td');
-  const td2 = document.createElement('td');
-  td1.style.fontWeight = '600';
-  td1.textContent = label;
-  td2.innerHTML = value;
-  tr.append(td1, td2, statusCell(ok));
-  reviewBody.appendChild(tr);
-}
-
-function buildReview() {
-  reviewBody.innerHTML = '';
-
-  const gender    = (form.querySelector('input[name="gender"]:checked')   || {}).value || '';
-  const apptType  = (form.querySelector('input[name="apptType"]:checked') || {}).value || '';
-  const insurance = (form.querySelector('input[name="insurance"]:checked')|| {}).value || '';
-  const history   = [...form.querySelectorAll('input[name="history"]:checked')].map(x => x.value).join(', ') || '(none)';
-  const ssnRaw    = ssn.value.replace(/\D/g, '');
-
-  const checks = [
-    ['First Name', firstName.value.trim(), vFirstName()],
-    ['Middle Initial', mi.value.trim() || '(blank)', vMI()],
-    ['Last Name', lastName.value.trim(), vLastName()],
-    ['Date of Birth', dobField.value || '(none)', vDOB()],
-    ['SSN', ssnPretty(ssnRaw), vSSN()],
-    ['Email', email.value.trim(), vEmail()],
-    ['Phone', phone.value.trim(), vPhone()],
-    ['Address 1', address1.value.trim(), vAddress1()],
-    ['Address 2', address2.value.trim() || '(blank)', vAddress2()],
-    ['City', city.value.trim(), vCity()],
-    ['State', stateSel.value || '(none)', vState()],
-    ['ZIP', zip.value.trim(), vZip()],
-    ['User ID', userId.value.trim(), vUserId()],
-    ['Password', '(hidden)', vPassword()],
-    ['Confirm Password', '(hidden)', vPasswordMatch()],
-    ['Gender', gender || '(not selected)', true],
-    ['Medical History', history, true],
-    ['Appointment Type', apptType || '(not selected)', true],
-    ['Insurance', insurance || '(not selected)', true],
-  ];
-
-  checks.forEach(([label, value, ok]) => addRow(label, String(value), ok));
-}
-
-/* ====== Smart button logic: Review → Submit ====== */
+/* ====== Smart button logic: Review → Submit (no review pane) ====== */
 function setActionToReview() {
+  if (!actionBtn) return;
   actionBtn.textContent = 'Review';
   actionBtn.type = 'button';
   actionBtn.dataset.mode = 'review';
 }
 function setActionToSubmit() {
+  if (!actionBtn) return;
   actionBtn.textContent = 'Submit';
   actionBtn.type = 'submit';
   actionBtn.dataset.mode = 'submit';
 }
 setActionToReview();
 
-actionBtn.addEventListener('click', (e) => {
-  // If in submit mode, let the browser submit to TYpage.html
-  if (actionBtn.dataset.mode === 'submit') return;
+if (actionBtn && form) {
+  actionBtn.addEventListener('click', () => {
+    // If already in submit mode, let native submit happen
+    if (actionBtn.dataset.mode === 'submit') return;
 
-  const allGood = validateAll();
-  buildReview();
-  reviewPane.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const allGood = typeof validateAll === 'function' ? validateAll() : form.checkValidity();
 
-  if (allGood) {
-    setActionToSubmit();
-  } else {
-    setActionToReview();
-    const firstInvalid = form.querySelector('[aria-invalid="true"]');
-    if (firstInvalid) firstInvalid.focus();
-  }
-});
+    if (allGood) {
+      setActionToSubmit();
+      // optional: small cue -> actionBtn.textContent = 'Submit (All checks passed)';
+    } else {
+      // show built-in messages if needed
+      if (form.reportValidity) form.reportValidity();
+      setActionToReview();
+      const firstInvalid = form.querySelector('[aria-invalid="true"], :invalid');
+      if (firstInvalid) {
+        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstInvalid.focus({ preventScroll: true });
+      }
+    }
+  });
 
-/* Flip back to Review if user edits after it became Submit */
-function flipBackOnChange() {
-  if (actionBtn.dataset.mode === 'submit') setActionToReview();
+  // Flip back to Review if user edits anything after it became Submit
+  form.addEventListener('input', () => {
+    if (actionBtn.dataset.mode === 'submit') setActionToReview();
+  });
 }
 
 /* ====== On-the-fly listeners (input + blur) ====== */
@@ -351,7 +300,7 @@ function flipBackOnChange() {
       case pw:        vPassword(); vPasswordMatch(); break;
       case pw2:       vPasswordMatch(); break;
     }
-    flipBackOnChange();
+    if (actionBtn?.dataset.mode === 'submit') setActionToReview();
   });
 
   el.addEventListener('blur', () => {
@@ -365,10 +314,12 @@ if (form) {
     const ok = validateAll();
     if (!ok) {
       e.preventDefault();
-      buildReview();
       setActionToReview();
-      const firstInvalid = form.querySelector('[aria-invalid="true"]');
-      if (firstInvalid) firstInvalid.focus();
+      const firstInvalid = form.querySelector('[aria-invalid="true"], :invalid');
+      if (firstInvalid) {
+        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstInvalid.focus({ preventScroll: true });
+      }
     }
   });
 }
