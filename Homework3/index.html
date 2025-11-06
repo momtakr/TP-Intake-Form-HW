@@ -178,9 +178,9 @@
         </tr>
         <tr>
           <td><label for="zip">Zip Code:<span class="required-star">*</span></label></td>
-          <td><input type="text" id="zip" name="zip" maxlength="5" required
-                     pattern="^\d{5}$" placeholder="77002"
-                     title="5 digits only"></td>
+          <td><input type="text" id="zip" name="zip" maxlength="10" required
+                     pattern="^\d{5}(-\d{4})?$" placeholder="77002 or 77002-1234"
+                     title="5 digits or ZIP+4; truncated to 5 on review"></td>
         </tr>
 
         <!-- SECTION: Health Information -->
