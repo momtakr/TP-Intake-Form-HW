@@ -125,3 +125,18 @@ footer {
   background-color: #0f221a;
   color: white;
 }
+
+input[type="date"]:invalid {
+  color: #999;           
+}
+input[type="date"]:valid {
+  color: #000;           
+}
+select:invalid {
+  color: #999;          
+}
+select option[value=""] {
+  color: #999;           
+select:valid {
+  color: #000;         
+}
