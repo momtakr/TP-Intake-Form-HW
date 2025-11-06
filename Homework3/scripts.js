@@ -103,7 +103,7 @@ if (email) {
 function vFirstName() {
   const v = firstName.value.trim();
   const ok = /^[A-Za-z'\-]{1,30}$/.test(v);
-  if (!ok) setError(firstName, '1–30 letters, apostrophes, dashes only.');
+  if (!ok) setError(firstName, 'Please enter your first name.');
   else clearError(firstName);
   return ok;
 }
@@ -111,7 +111,7 @@ function vFirstName() {
 function vMI() {
   const v = mi.value.trim();
   const ok = v === '' || /^[A-Za-z]$/.test(v);
-  if (!ok) setError(mi, 'Leave blank or enter 1 letter.');
+  if (!ok) setError(mi, 'Please enter your middle intial.');
   else clearError(mi);
   return ok;
 }
@@ -119,7 +119,7 @@ function vMI() {
 function vLastName() {
   const v = lastName.value.trim();
   const ok = /^[A-Za-z'\-]{1,30}$/.test(v);
-  if (!ok) setError(lastName, '1–30 letters, apostrophes, dashes only.');
+  if (!ok) setError(lastName, 'Please enter your last name.');
   else clearError(lastName);
   return ok;
 }
@@ -139,7 +139,7 @@ function vDOB() {
 function vSSN() {
   const raw = ssn.value.replace(/\D/g, '');
   const ok = /^\d{9}$/.test(raw);
-  if (!ok) setError(ssn, 'Enter exactly 9 digits.');
+  if (!ok) setError(ssn, 'Please enter 9 digit ss number.');
   else clearError(ssn);
   return ok;
 }
@@ -147,7 +147,7 @@ function vSSN() {
 function vEmail() {
   const v = email.value.trim().toLowerCase(); email.value = v;
   const ok = /^[^\s@]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(v);
-  if (!ok) setError(email, 'Use a valid email like name@domain.tld.');
+  if (!ok) setError(email, 'Please enter a valid email address.');
   else clearError(email);
   return ok;
 }
@@ -155,7 +155,7 @@ function vEmail() {
 function vPhone() {
   const v = phone.value;
   const ok = /^\(\d{3}\) \d{3}-\d{4}$/.test(v);
-  if (!ok) setError(phone, 'Format must be (123) 456-7890.');
+  if (!ok) setError(phone, 'Please enter a valid phone number.');
   else clearError(phone);
   return ok;
 }
@@ -163,7 +163,7 @@ function vPhone() {
 function vAddress1() {
   const v = address1.value.trim();
   const ok = /^.{2,30}$/.test(v);
-  if (!ok) setError(address1, '2–30 characters.');
+  if (!ok) setError(address1, 'Please enter a valid address.');
   else clearError(address1);
   return ok;
 }
@@ -171,7 +171,7 @@ function vAddress1() {
 function vAddress2() {
   const v = address2.value.trim();
   const ok = v === '' || /^.{2,30}$/.test(v);
-  if (!ok) setError(address2, '2–30 characters or leave blank.');
+  if (!ok) setError(address2, 'Please enter a valid address.');
   else clearError(address2);
   return ok;
 }
@@ -179,7 +179,7 @@ function vAddress2() {
 function vCity() {
   const v = city.value.trim();
   const ok = /^[A-Za-z.\-\s]{2,30}$/.test(v);
-  if (!ok) setError(city, '2–30 letters/spaces.');
+  if (!ok) setError(city, 'Please enter a valid city.');
   else clearError(city);
   return ok;
 }
@@ -202,7 +202,7 @@ function vZip() {
 function vUserId() {
   const v = userId.value.trim();
   const ok = /^[A-Za-z][A-Za-z0-9_-]{4,19}$/.test(v); // 5–20, starts with letter
-  if (!ok) setError(userId, '5–20 chars, start with letter; letters/digits/_/- only.');
+  if (!ok) setError(userId, 'Start with a letter, 5+ chars, only use letters/digits/_/-.');
   else clearError(userId);
   return ok;
 }
@@ -211,7 +211,7 @@ function vPassword() {
   const v = pw.value;
   const uid = userId.value.trim();
   const ok = v.length >= 8 && /[A-Z]/.test(v) && /[a-z]/.test(v) && /\d/.test(v) && (!uid || v !== uid);
-  if (!ok) setError(pw, '8+ chars with upper, lower, digit; cannot equal User ID.');
+  if (!ok) setError(pw, '8+ chars with upper, lower, digit; cannot contain User ID.');
   else clearError(pw);
   return ok;
 }
