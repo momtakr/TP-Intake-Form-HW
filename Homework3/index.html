@@ -13,7 +13,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZhenLife Medical Center – Patient Registration</title>
   <link rel="stylesheet" href="Styles.css">
+
   <style>
+    /* existing inline helpers */
     .err, .error-msg { color: #b00020; font-size: 0.9rem; margin-top: 4px; min-height: 1.2em; }
     .review-pane { margin-top: 24px; background:#fff; border:1px solid #ccc; border-radius:8px; padding:12px; }
     .review-pane h3 { margin-top: 0; text-align: center; font-size: 1.3rem; text-transform: uppercase; }
@@ -23,6 +25,24 @@
     .review-table td:last-child { font-weight:700; text-align:center; }
     .pass { color:#1b5e20; }
     .error { color:#b71c1c; }
+
+    /* === ADDED: match old look (big headers + underline lines) === */
+    .page-title{
+      font-size:3.5rem;     /* large like your old screenshot */
+      font-weight:800;
+      margin:0 0 20px;
+      line-height:1.2;
+      color:#111;
+    }
+    .section-header{
+      font-size:1.8rem;     /* bigger section headers */
+      font-weight:700;
+      margin:25px 0 12px;
+      padding-bottom:8px;
+      border-bottom:2px solid rgba(0,0,0,0.15); /* thicker divider line */
+      color:#111;
+      line-height:1.3;
+    }
   </style>
 </head>
 
@@ -260,6 +280,20 @@
         </tr>
       </table>
 
+      <!-- === RESTORED REVIEW PANE (needed for Review → Submit flow) === -->
+      <section class="review-pane" id="reviewPane">
+        <h3>PLEASE REVIEW THIS INFORMATION</h3>
+        <table class="review-table">
+          <thead><tr><th>Field</th><th>Value</th><th>Status</th></tr></thead>
+          <tbody id="reviewBody">
+            <tr><td colspan="3" class="small">Click <strong>Review</strong> to preview your entries here.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+    </form>
+  </div>
+
   <!-- Footer -->
   <footer>
     <p>ZhenLife Medical Center © 2025 |
@@ -267,7 +301,7 @@
     <a href="#">Contact Us</a></p>
   </footer>
 
-<!-- External JS -->
-<script src="scripts.js"></script>
+  <!-- External JS -->
+  <script src="scripts.js"></script>
 </body>
 </html>
