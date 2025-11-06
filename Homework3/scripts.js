@@ -1,9 +1,9 @@
 /* 
   Program: script.js
   Author: Ivan Zheng
-  Version: 1.6
+  Version: 1.7
   Date: 11/05/2025
-  Description: On-the-fly validation + single smart button (Review → Submit) — no review pane
+  Description: On-the-fly validation + single smart button (Review → Submit) — no review pane, 2-step confirm
 */
 
 /* ====== Header date ====== */
@@ -191,8 +191,7 @@ function vState() {
 
 function vZip() {
   const v = zip.value.trim();
-  // Match HTML pattern: 5 digits or ZIP+4
-  const ok = /^\d{5}(-\d{4})?$/.test(v);
+  const ok = /^\d{5}(-\d{4})?$/.test(v); // 5 or ZIP+4
   if (!ok) setError(zip, '5 digits or ZIP+4 (12345 or 12345-6789).');
   else clearError(zip);
   return ok;
@@ -222,7 +221,6 @@ function vPasswordMatch() {
   return ok;
 }
 
-/* ====== Group runner ====== */
 function validateAll() {
   const results = [
     vFirstName(), vMI(), vLastName(), vDOB(), vSSN(), vEmail(), vPhone(),
@@ -232,35 +230,38 @@ function validateAll() {
   return results.every(Boolean);
 }
 
-/* ====== Smart button logic: Review → Submit (no review pane) ====== */
 function setActionToReview() {
   if (!actionBtn) return;
   actionBtn.textContent = 'Review';
-  actionBtn.type = 'button';
+  actionBtn.type = 'button';           
   actionBtn.dataset.mode = 'review';
+  actionBtn.title = 'Check your entries';
 }
 function setActionToSubmit() {
   if (!actionBtn) return;
   actionBtn.textContent = 'Submit';
-  actionBtn.type = 'submit';
+  actionBtn.type = 'submit';            
   actionBtn.dataset.mode = 'submit';
+  actionBtn.title = 'All checks passed — click again to confirm';
 }
 setActionToReview();
 
 if (actionBtn && form) {
-  actionBtn.addEventListener('click', () => {
-    // If already in submit mode, let native submit happen
-    if (actionBtn.dataset.mode === 'submit') return;
+  const allGood = () => (typeof validateAll === 'function' ? validateAll() : form.checkValidity());
 
-    const allGood = typeof validateAll === 'function' ? validateAll() : form.checkValidity();
+  actionBtn.addEventListener('click', (e) => {
+    if (actionBtn.dataset.mode === 'submit') {
+      return;
+    }
+    
+    e.preventDefault();
 
-    if (allGood) {
-      setActionToSubmit();
-      // optional: small cue -> actionBtn.textContent = 'Submit (All checks passed)';
+    if (allGood()) {
+      setActionToSubmit();             
+      actionBtn.focus();               
     } else {
-      // show built-in messages if needed
-      if (form.reportValidity) form.reportValidity();
       setActionToReview();
+      if (form.reportValidity) form.reportValidity(); 
       const firstInvalid = form.querySelector('[aria-invalid="true"], :invalid');
       if (firstInvalid) {
         firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -269,13 +270,17 @@ if (actionBtn && form) {
     }
   });
 
-  // Flip back to Review if user edits anything after it became Submit
+  form.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && actionBtn.dataset.mode !== 'submit') {
+      e.preventDefault();
+    }
+  });
+
   form.addEventListener('input', () => {
     if (actionBtn.dataset.mode === 'submit') setActionToReview();
   });
 }
 
-/* ====== On-the-fly listeners (input + blur) ====== */
 [
   firstName, mi, lastName, dobField, ssn, email, phone,
   address1, address2, city, stateSel, zip,
@@ -296,7 +301,7 @@ if (actionBtn && form) {
       case city:      vCity(); break;
       case stateSel:  vState(); break;
       case zip:       vZip(); break;
-      case userId:    vUserId(); vPassword(); break; // userId affects pw rule (≠ userId)
+      case userId:    vUserId(); vPassword(); break; 
       case pw:        vPassword(); vPasswordMatch(); break;
       case pw2:       vPasswordMatch(); break;
     }
@@ -304,11 +309,10 @@ if (actionBtn && form) {
   });
 
   el.addEventListener('blur', () => {
-    el.dispatchEvent(new Event('input')); // persist message on leave
+    el.dispatchEvent(new Event('input'));
   });
 });
 
-/* ====== Final submit guard (belts & suspenders) ====== */
 if (form) {
   form.addEventListener('submit', (e) => {
     const ok = validateAll();
