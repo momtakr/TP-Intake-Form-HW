@@ -192,3 +192,11 @@ iframe {
   border: 1px solid #777;
   border-radius: 6px;
 }
+
+.remember-label {
+  font-size: 0.95rem;
+  color: #000;
+  font-weight: 600;
+  font-style: normal;
+}
+
