@@ -21,14 +21,19 @@
       margin: 0 0 20px;
       line-height: 1.2;
       color: #111;
+      letter-spacing: .3px;
+      font-family: Georgia, "Times New Roman", serif;
     }
+
     .section-header {
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 700;
-      margin: 25px 0 12px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid rgba(0,0,0,0.15);
-      color: #111;
+      margin: 30px 0 14px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid rgba(0,0,0,0.18);
+      color: #0f221a;
+      letter-spacing: .2px;
+      font-family: Georgia, "Times New Roman", serif;
     }
 
     .modal-backdrop {
@@ -38,24 +43,28 @@
       background: rgba(0,0,0,0.55);
       z-index: 9990;
     }
+
     .modal {
       position: fixed;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       background: #ffffff;
-      padding: 25px 25px 30px;
+      padding: 28px 30px;
       border-radius: 12px;
-      width: 340px;
+      width: 360px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.25);
       z-index: 9991;
       text-align: center;
-      font-family: Arial, Helvetica, sans-serif;
     }
+
     .modal-content h2 {
       margin-top: 0;
-      font-family: Georgia, "Times New Roman", serif;
       font-weight: 700;
+      font-size: 1.9rem;
+      color: #0f221a;
+      font-family: Georgia, "Times New Roman", serif;
     }
+
     .modal-btn {
       padding: 10px 18px;
       border: none;
@@ -65,22 +74,36 @@
       font-weight: 600;
       cursor: pointer;
     }
+
     .modal-btn.danger {
       background: #8b0000;
     }
 
     .iframe-section {
-      margin: 20px 0 28px 0;
+      margin: 20px 0 28px;
       padding: 18px;
       background: #ffffff;
       border: 1px solid #ccc;
       border-radius: 8px;
     }
+
     iframe {
       width: 100%;
       height: 300px;
       border: 1px solid #777;
       border-radius: 6px;
+    }
+
+    .remember-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .remember-label {
+      font-size: 0.9rem;
+      color: rgba(0,0,0,0.45);
+      font-style: italic;
     }
   </style>
 </head>
@@ -121,24 +144,29 @@
 
         <tr>
           <td>First Name *</td>
-          <td><input type="text" id="firstname" maxlength="30" required></td>
+          <td><input type="text" id="firstname" maxlength="30" required placeholder="First name"></td>
         </tr>
+
         <tr>
           <td>Middle Initial</td>
-          <td><input type="text" id="mi" maxlength="1"></td>
+          <td><input type="text" id="mi" maxlength="1" placeholder="M"></td>
         </tr>
+
         <tr>
           <td>Last Name *</td>
-          <td><input type="text" id="lastname" maxlength="30" required></td>
+          <td><input type="text" id="lastname" maxlength="30" required placeholder="Last name"></td>
         </tr>
+
         <tr>
           <td>Date of Birth *</td>
           <td><input type="date" id="dob" required></td>
         </tr>
+
         <tr>
           <td>SSN *</td>
-          <td><input type="password" id="ssn" maxlength="9" required></td>
+          <td><input type="password" id="ssn" maxlength="9" required placeholder="123456789"></td>
         </tr>
+
         <tr>
           <td>Gender</td>
           <td class="inline-group">
@@ -152,27 +180,31 @@
 
         <tr>
           <td>Email *</td>
-          <td><input type="email" id="email" required></td>
+          <td><input type="email" id="email" required placeholder="name@domain.com"></td>
         </tr>
+
         <tr>
           <td>Phone *</td>
-          <td><input type="tel" id="phone" required></td>
+          <td><input type="tel" id="phone" required placeholder="(123) 456-7890"></td>
         </tr>
 
         <tr><td colspan="2"><h3 class="section-header">Address</h3></td></tr>
 
         <tr>
           <td>Address 1 *</td>
-          <td><input type="text" id="address1" required maxlength="30"></td>
+          <td><input type="text" id="address1" required maxlength="30" placeholder="123 Main St"></td>
         </tr>
+
         <tr>
           <td>Address 2</td>
-          <td><input type="text" id="address2" maxlength="30"></td>
+          <td><input type="text" id="address2" maxlength="30" placeholder="Apt or Unit (optional)"></td>
         </tr>
+
         <tr>
           <td>City *</td>
-          <td><input type="text" id="city" required maxlength="30"></td>
+          <td><input type="text" id="city" required maxlength="30" placeholder="City"></td>
         </tr>
+
         <tr>
           <td>State *</td>
           <td>
@@ -181,9 +213,10 @@
             </select>
           </td>
         </tr>
+
         <tr>
           <td>ZIP *</td>
-          <td><input type="text" id="zip" required maxlength="10"></td>
+          <td><input type="text" id="zip" required maxlength="10" placeholder="77002 or 77002-1234"></td>
         </tr>
 
         <tr><td colspan="2"><h3 class="section-header">Health Information</h3></td></tr>
@@ -205,25 +238,27 @@
 
         <tr>
           <td>User ID *</td>
-          <td><input type="text" id="userid" required maxlength="20"></td>
+          <td><input type="text" id="userid" required maxlength="20" placeholder="User ID"></td>
         </tr>
+
         <tr>
           <td>Password *</td>
-          <td><input type="password" id="password" required></td>
+          <td><input type="password" id="password" required placeholder="Password"></td>
         </tr>
+
         <tr>
           <td>Confirm *</td>
           <td>
-            <input type="password" id="confirm" required>
+            <input type="password" id="confirm" required placeholder="Re-enter password">
             <div id="pwError" class="error-msg" style="display:none;">Passwords must match.</div>
           </td>
         </tr>
 
         <tr>
           <td>Remember Me</td>
-          <td>
+          <td class="remember-wrap">
             <input type="checkbox" id="rememberMe" checked>
-            <span class="help">Store name + form data for 48 hrs.</span>
+            <span class="remember-label">Remember me</span>
           </td>
         </tr>
 
