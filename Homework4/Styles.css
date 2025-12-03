@@ -207,3 +207,25 @@ input[type="date"]:invalid {
 select:invalid {
   color: rgba(0,0,0,0.45);
 }
+
+input[type="date"]:invalid {
+  color: rgba(0,0,0,0.45);
+  font-style: italic;
+}
+
+select:invalid {
+  color: rgba(0,0,0,0.45);
+  font-style: italic;
+}
+
+::placeholder {
+  color: rgba(0,0,0,0.45);
+  font-style: italic;
+  opacity: 1;
+}
+
+input[type="date"]:valid,
+select:valid {
+  font-style: normal;
+  color: #000;
+}
