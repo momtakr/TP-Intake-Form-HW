@@ -14,7 +14,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #f0f8ff;
   color: #222;
-  padding-bottom: 80px;
 }
 
 h1, h2, h3 {
@@ -129,10 +128,8 @@ footer {
   padding: 15px;
   background-color: #0f221a;
   color: white;
-  position: fixed;
-  bottom: 0;
-  left: 0;
   width: 100%;
+  margin-top: 40px;
 }
 
 /* MODAL */
@@ -194,9 +191,4 @@ iframe {
   height: 300px;
   border: 1px solid #777;
   border-radius: 6px;
-}
-
-/* Small layout safety */
-.container:last-child {
-  margin-bottom: 100px;
 }
