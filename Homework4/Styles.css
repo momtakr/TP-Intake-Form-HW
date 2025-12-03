@@ -42,6 +42,10 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  position: sticky;
+  top: 0;
+  z-index: 500;
 }
 
 .header-container h1 { margin: 0; }
@@ -172,7 +176,7 @@ footer {
 }
 
 .modal-btn.danger {
-  background: #8b0000;
+  background: rgba(0,0,0,0.45);
 }
 
 /* IFRAME */
