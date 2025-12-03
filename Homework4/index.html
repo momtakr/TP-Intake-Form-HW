@@ -9,213 +9,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZhenLife Medical Center – Patient Registration (HW4)</title>
-  <link rel="stylesheet" href="Styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZhenLife Medical Center – Patient Registration</title>
+  <link rel="stylesheet" href="Styles.css">
 
   <style>
-    /* Welcome banner */
-    #welcomeBanner {
-      width: 100%;
-      background: #1c5e37;
-      color: white;
-      padding: 8px 14px;
-      font-size: 1.2rem;
-      font-weight: 600;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 9000;
-    }
-    #notMeContainer {
-      position: fixed;
-      top: 48px;
-      left: 0;
-      background: #0f221a;
-      color: white;
-      padding: 6px 14px;
-      font-size: 0.95rem;
-      z-index: 9001;
-      display: none;
-    }
-    #notMeContainer button {
-      padding: 4px 8px;
-      background: #750000;
-      border: none;
-      border-radius: 4px;
-      color: white;
-      cursor: pointer;
-      margin-left: 6px;
-    }
+    .page-title{font-size:3.5rem;font-weight:800;margin:0 0 20px;line-height:1.2;color:#111;}
+    .section-header{font-size:1.8rem;font-weight:700;margin:25px 0 12px;padding-bottom:8px;border-bottom:2px solid rgba(0,0,0,0.15);color:#111;line-height:1.3;}
 
-    /* Push page content below banners */
-    body { padding-top: 95px; }
-
-    .iframe-section {
-      margin: 25px 0;
-      padding: 15px;
-      border-radius: 8px;
-      background: #ffffff;
-      border: 1px solid #ccc;
+    /* Step-1: Welcome banner */
+    #welcomeBanner{
+      width:100%;
+      background:#1c5e37;
+      color:white;
+      padding:8px 14px;
+      font-size:1.2rem;
+      font-weight:600;
     }
-    iframe {
-      width: 100%;
-      height: 300px;
-      border: 1px solid #888;
-      border-radius: 6px;
+    #notMeContainer{
+      margin-top:6px;
+      font-size:0.95rem;
+      font-weight:600;
     }
-
-    /* Fixed footer */
-    footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      z-index: 9000;
-    }
-    .page-title {
-      font-size: 3.2rem;
-      font-weight: 800;
-      margin: 0 0 16px;
-    }
-    .section-header {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin: 25px 0 12px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+    #notMeContainer button{
+      padding:4px 8px;
+      background:#750000;
+      border:none;
+      border-radius:4px;
+      color:white;
+      cursor:pointer;
+      font-size:0.9rem;
+      margin-left:6px;
     }
   </style>
 </head>
 
 <body>
-  <!-- COOKIES BANNER -->
+
+  <!-- Step-1: Welcome banner inserted -->
   <div id="welcomeBanner">Welcome new user</div>
-  <div id="notMeContainer">
-    Not <span id="cookieName"></span>?
+  <div id="notMeContainer" style="display:none;">
+    Not <span id="cookieName"></span>? 
     <button id="notMeBtn" type="button">Start over</button>
   </div>
 
-  <!-- HEADER -->
+  <!-- Header -->
   <div class="header-container">
-    <img src="./Zhenlife.png" id="logo" width="100" height="100" />
+    <img src="./Zhenlife.png" alt="Zhenlife Logo" id="logo" width="100" height="100">
     <h1>ZhenLife Medical Center</h1>
     <p id="datetime"></p>
   </div>
 
-  <!-- IFRAME SECTION -->
-  <div class="container iframe-section">
-    <h3>Helpful Resources</h3>
-    <p>Below is an embedded help frame showing your custom help file:</p>
-    <iframe src="iframe-help.html"></iframe>
-  </div>
-
-  <!-- FORM -->
+  <!-- Form -->
   <div class="container">
-    <h2 class="page-title">Patient Registration</h2>
+    <header>
+      <h2 class="page-title">Patient Registration</h2>
+    </header>
 
     <form id="patientForm" action="TYpage.html" method="get" novalidate>
       <table class="form-table">
 
-        <!-- Personal -->
+        <!-- Personal Information -->
         <tr><td colspan="2"><h3 class="section-header">Personal Information</h3></td></tr>
 
         <tr>
-          <td>First Name *</td>
-          <td><input id="firstname" name="firstname" required maxlength="30"></td>
+          <td><label for="firstname">First Name:<span class="required-star">*</span></label></td>
+          <td><input type="text" id="firstname" name="firstname" maxlength="30" required
+                     pattern="[A-Za-z'\-]{1,30}" placeholder="First name"></td>
+        </tr>
+        <tr>
+          <td><label for="mi">Middle Initial:</label></td>
+          <td><input type="text" id="mi" name="mi" maxlength="1" placeholder="M"></td>
+        </tr>
+        <tr>
+          <td><label for="lastname">Last Name:<span class="required-star">*</span></label></td>
+          <td><input type="text" id="lastname" name="lastname" maxlength="30" required
+                     pattern="[A-Za-z'\-]{1,30}" placeholder="Last name"></td>
         </tr>
 
         <tr>
-          <td>Middle Initial</td>
-          <td><input id="mi" maxlength="1"></td>
+          <td><label for="dob">Date of Birth:<span class="required-star">*</span></label></td>
+          <td><input type="date" id="dob" name="dob" required></td>
+        </tr>
+        <tr>
+          <td><label for="ssn">SSN:<span class="required-star">*</span></label></td>
+          <td><input type="password" id="ssn" name="ssn" maxlength="9" inputmode="numeric" required
+                     pattern="\d{9}" placeholder="123456789"></td>
         </tr>
 
         <tr>
-          <td>Last Name *</td>
-          <td><input id="lastname" name="lastname" required maxlength="30"></td>
-        </tr>
-
-        <tr>
-          <td>Date of Birth *</td>
-          <td><input type="date" id="dob" required></td>
-        </tr>
-
-        <tr>
-          <td>SSN *</td>
-          <td><input type="password" id="ssn" maxlength="9" required></td>
-        </tr>
-
-        <tr>
-          <td>Gender</td>
+          <td><label>Gender:</label></td>
           <td class="inline-group">
-            <label><input type="radio" name="gender" value="Male">Male</label>
-            <label><input type="radio" name="gender" value="Female">Female</label>
-            <label><input type="radio" name="gender" value="Other">Other</label>
+            <label><input type="radio" name="gender" value="Male"> Male</label>
+            <label><input type="radio" name="gender" value="Female"> Female</label>
+            <label><input type="radio" name="gender" value="Other"> Other</label>
           </td>
         </tr>
 
         <!-- Contact -->
         <tr><td colspan="2"><h3 class="section-header">Contact Information</h3></td></tr>
-
         <tr>
-          <td>Email *</td>
-          <td><input type="email" id="email" required></td>
+          <td><label for="email">Email:<span class="required-star">*</span></label></td>
+          <td><input type="email" id="email" name="email" placeholder="name@domain.com" required></td>
         </tr>
-
         <tr>
-          <td>Phone *</td>
-          <td><input type="tel" id="phone" required></td>
+          <td><label for="phone">Phone #:<span class="required-star">*</span></label></td>
+          <td><input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" required></td>
         </tr>
 
         <!-- Address -->
         <tr><td colspan="2"><h3 class="section-header">Address</h3></td></tr>
-
         <tr>
-          <td>Address 1 *</td>
-          <td><input id="address1" required></td>
+          <td><label for="address1">Address Line 1:<span class="required-star">*</span></label></td>
+          <td><input type="text" id="address1" name="address1" maxlength="30" required></td>
         </tr>
-
         <tr>
-          <td>Address 2</td>
-          <td><input id="address2"></td>
+          <td><label for="address2">Address Line 2:</label></td>
+          <td><input type="text" id="address2" name="address2" maxlength="30"></td>
         </tr>
-
         <tr>
-          <td>City *</td>
-          <td><input id="city" required></td>
+          <td><label for="city">City:<span class="required-star">*</span></label></td>
+          <td><input type="text" id="city" name="city" maxlength="30" required></td>
         </tr>
-
         <tr>
-          <td>State *</td>
+          <td><label for="state">State:<span class="required-star">*</span></label></td>
           <td>
-            <select id="state" required>
-              <option value="">Loading...</option>
+            <select id="state" name="state" required>
+              <option value="">-Select State-</option>
+              <!-- Fetch API will replace this list -->
             </select>
           </td>
         </tr>
-
         <tr>
-          <td>ZIP *</td>
-          <td><input id="zip" required></td>
+          <td><label for="zip">Zip Code:<span class="required-star">*</span></label></td>
+          <td><input type="text" id="zip" name="zip" maxlength="10" required></td>
         </tr>
 
         <!-- Health -->
         <tr><td colspan="2"><h3 class="section-header">Health Information</h3></td></tr>
-
         <tr>
-          <td>Feeling Today (1-10)</td>
+          <td><label for="health">How are you feeling today? (1-10):</label></td>
           <td>
-            <input type="range" id="health" min="1" max="10" value="5"
-              oninput="healthValue.textContent=this.value">
+            <input type="range" id="health" name="health" min="1" max="10" value="5"
+                   oninput="healthValue.textContent = this.value">
             <span id="healthValue">5</span>
           </td>
         </tr>
 
         <tr>
-          <td>Medical History</td>
-          <td id="historyContainer" class="inline-group">
-            <!-- loaded by Fetch API -->
+          <td><label>Medical History:</label></td>
+          <td class="inline-group" id="historyContainer">
+            <!-- Will be populated by Fetch API in step 3 -->
           </td>
         </tr>
 
@@ -223,29 +168,27 @@
         <tr><td colspan="2"><h3 class="section-header">Account Information</h3></td></tr>
 
         <tr>
-          <td>User ID *</td>
-          <td><input id="userid" required maxlength="20"></td>
+          <td><label for="userid">User ID:<span class="required-star">*</span></label></td>
+          <td><input type="text" id="userid" name="userid" maxlength="20" required></td>
         </tr>
-
         <tr>
-          <td>Password *</td>
-          <td><input id="password" type="password" required></td>
+          <td><label for="password">Password:<span class="required-star">*</span></label></td>
+          <td><input type="password" id="password" name="password" required></td>
         </tr>
-
         <tr>
-          <td>Confirm *</td>
+          <td><label for="confirm">Confirm Password:<span class="required-star">*</span></label></td>
           <td>
-            <input id="confirm" type="password" required>
+            <input type="password" id="confirm" name="confirm" required>
             <div id="pwError" class="error-msg" style="display:none;">Passwords must match.</div>
           </td>
         </tr>
 
-        <!-- Remember me -->
+        <!-- Step-1: Remember Me -->
         <tr>
-          <td>Remember Me</td>
+          <td><label for="rememberMe">Remember Me:</label></td>
           <td>
-            <input id="rememberMe" type="checkbox" checked>
-            <span class="help">Store name + form data for 48 hours.</span>
+            <input type="checkbox" id="rememberMe" name="rememberMe" checked>
+            <span class="help">Store first name + form data for 48 hours.</span>
           </td>
         </tr>
 
@@ -254,18 +197,18 @@
           <td></td>
           <td>
             <button id="actionBtn" type="button">Review</button>
-            <button type="reset" id="fullReset">Clear and Start Over</button>
+            <button type="reset">Clear and Start Over</button>
           </td>
         </tr>
-
       </table>
     </form>
   </div>
 
+  <!-- Footer -->
   <footer>
-    ZhenLife Medical Center © 2025 |
-    <a href="#">Privacy</a> |
-    <a href="#">Contact</a>
+    <p>ZhenLife Medical Center © 2025 |
+    <a href="#">Privacy Policy</a> |
+    <a href="#">Contact Us</a></p>
   </footer>
 
   <script src="scripts.js"></script>
