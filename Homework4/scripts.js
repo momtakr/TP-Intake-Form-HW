@@ -2,7 +2,7 @@
   Program: scripts.js HW4
   Author: Ivan Zheng
   Version: 1.7
-  Date: 12/2025
+  Date: 12/02/2025
 */
 
 /* =========================================================
