@@ -1,1 +1,123 @@
+<!--
+  Program name: TYpage
+  Author: Ivan Zheng
+  Date Created: 12/02/25
+  Version: 1.0
+  Description: Thank You page for ZhenLife Medical Center
+-->
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ZhenLife Medical Center – Thank You</title>
+
+  <link rel="stylesheet" href="Styles.css" />
+  <style>
+
+    body { font-family: Arial, Helvetica, sans-serif; }
+    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; letter-spacing: .2px; }
+
+    .ty-card {
+      max-width: 900px;
+      margin: 24px auto;
+      background: #ffffff;
+      border: 1px solid #d9d9d9;
+      border-radius: 12px;
+      padding: 28px 28px 24px;
+      box-shadow: 0 8px 22px rgba(0,0,0,.06);
+    }
+    .ty-headline {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 0 0 6px;
+      font-size: 2rem;
+    }
+    .success-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #1c5e37;   
+      color: #fff;
+      font-size: 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    }
+    .ty-sub {
+      margin: 0 0 18px;
+      color: #444;
+      line-height: 1.4;
+    }
+
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      border: 0;
+      background: #1c5e37;
+      color: #fff;
+    }
+    .btn:hover { opacity: .92; }
+    .btn-secondary {
+      background: #0f221a;
+      color: #fff;
+    }
+
+    
+    .ty-card a.link {
+      color: #0077B5;
+      text-decoration: underline;
+    }
+    .ty-card a.link:visited { color: #0000CD; }
+  </style>
+</head>
+<body>
+
+  
+  <div class="header-container">
+    <img src="./Zhenlife.png" alt="ZhenLife Logo" id="logo" width="100" height="100" />
+    <h1>ZhenLife Medical Center</h1>
+    <p id="datetime"></p>
+  </div>
+
+
+  <div class="ty-card">
+    <h2 class="ty-headline">
+      <span class="success-icon" aria-hidden="true">✓</span>
+      Thank you!
+    </h2>
+    <p class="ty-sub">
+      Your registration has been successfully submitted. We’ll reach out if we need anything else.
+    </p>
+
+    <div class="btn-row">
+      
+      <a class="btn" href="index.html">Return to Form</a>
+      <a class="btn btn-secondary" href="#" onclick="window.print();return false;">Print Confirmation</a>
+    </div>
+  </div>
+
+
+  <footer>
+    <p>ZhenLife Medical Center © 2025 |
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Contact Us</a>
+    </p>
+  </footer>
+
+  
+  <script>
+    const dateElement = document.getElementById('datetime');
+    const today = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    if (dateElement) dateElement.textContent = today.toLocaleDateString('en-US', options);
+  </script>
+</body>
+</html>
