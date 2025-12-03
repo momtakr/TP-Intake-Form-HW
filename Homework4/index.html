@@ -1,1 +1,266 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZhenLife Medical Center – Patient Registration (HW4)</title>
+  <link rel="stylesheet" href="Styles.css" />
+
+  <style>
+    /* Welcome banner */
+    #welcomeBanner {
+      width: 100%;
+      background: #1c5e37;
+      color: white;
+      padding: 8px 14px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9000;
+    }
+    #notMeContainer {
+      position: fixed;
+      top: 48px;
+      left: 0;
+      background: #0f221a;
+      color: white;
+      padding: 6px 14px;
+      font-size: 0.95rem;
+      z-index: 9001;
+      display: none;
+    }
+    #notMeContainer button {
+      padding: 4px 8px;
+      background: #750000;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+      margin-left: 6px;
+    }
+
+    /* Push page content below banners */
+    body { padding-top: 95px; }
+
+    .iframe-section {
+      margin: 25px 0;
+      padding: 15px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid #ccc;
+    }
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: 1px solid #888;
+      border-radius: 6px;
+    }
+
+    /* Fixed footer */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 9000;
+    }
+    .page-title {
+      font-size: 3.2rem;
+      font-weight: 800;
+      margin: 0 0 16px;
+    }
+    .section-header {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 25px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- COOKIES BANNER -->
+  <div id="welcomeBanner">Welcome new user</div>
+  <div id="notMeContainer">
+    Not <span id="cookieName"></span>?
+    <button id="notMeBtn" type="button">Start over</button>
+  </div>
+
+  <!-- HEADER -->
+  <div class="header-container">
+    <img src="./Zhenlife.png" id="logo" width="100" height="100" />
+    <h1>ZhenLife Medical Center</h1>
+    <p id="datetime"></p>
+  </div>
+
+  <!-- IFRAME SECTION -->
+  <div class="container iframe-section">
+    <h3>Helpful Resources</h3>
+    <p>Below is an embedded help frame showing your custom help file:</p>
+    <iframe src="iframe-help.html"></iframe>
+  </div>
+
+  <!-- FORM -->
+  <div class="container">
+    <h2 class="page-title">Patient Registration</h2>
+
+    <form id="patientForm" action="TYpage.html" method="get" novalidate>
+      <table class="form-table">
+
+        <!-- Personal -->
+        <tr><td colspan="2"><h3 class="section-header">Personal Information</h3></td></tr>
+
+        <tr>
+          <td>First Name *</td>
+          <td><input id="firstname" name="firstname" required maxlength="30"></td>
+        </tr>
+
+        <tr>
+          <td>Middle Initial</td>
+          <td><input id="mi" maxlength="1"></td>
+        </tr>
+
+        <tr>
+          <td>Last Name *</td>
+          <td><input id="lastname" name="lastname" required maxlength="30"></td>
+        </tr>
+
+        <tr>
+          <td>Date of Birth *</td>
+          <td><input type="date" id="dob" required></td>
+        </tr>
+
+        <tr>
+          <td>SSN *</td>
+          <td><input type="password" id="ssn" maxlength="9" required></td>
+        </tr>
+
+        <tr>
+          <td>Gender</td>
+          <td class="inline-group">
+            <label><input type="radio" name="gender" value="Male">Male</label>
+            <label><input type="radio" name="gender" value="Female">Female</label>
+            <label><input type="radio" name="gender" value="Other">Other</label>
+          </td>
+        </tr>
+
+        <!-- Contact -->
+        <tr><td colspan="2"><h3 class="section-header">Contact Information</h3></td></tr>
+
+        <tr>
+          <td>Email *</td>
+          <td><input type="email" id="email" required></td>
+        </tr>
+
+        <tr>
+          <td>Phone *</td>
+          <td><input type="tel" id="phone" required></td>
+        </tr>
+
+        <!-- Address -->
+        <tr><td colspan="2"><h3 class="section-header">Address</h3></td></tr>
+
+        <tr>
+          <td>Address 1 *</td>
+          <td><input id="address1" required></td>
+        </tr>
+
+        <tr>
+          <td>Address 2</td>
+          <td><input id="address2"></td>
+        </tr>
+
+        <tr>
+          <td>City *</td>
+          <td><input id="city" required></td>
+        </tr>
+
+        <tr>
+          <td>State *</td>
+          <td>
+            <select id="state" required>
+              <option value="">Loading...</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>ZIP *</td>
+          <td><input id="zip" required></td>
+        </tr>
+
+        <!-- Health -->
+        <tr><td colspan="2"><h3 class="section-header">Health Information</h3></td></tr>
+
+        <tr>
+          <td>Feeling Today (1-10)</td>
+          <td>
+            <input type="range" id="health" min="1" max="10" value="5"
+              oninput="healthValue.textContent=this.value">
+            <span id="healthValue">5</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Medical History</td>
+          <td id="historyContainer" class="inline-group">
+            <!-- loaded by Fetch API -->
+          </td>
+        </tr>
+
+        <!-- Account -->
+        <tr><td colspan="2"><h3 class="section-header">Account Information</h3></td></tr>
+
+        <tr>
+          <td>User ID *</td>
+          <td><input id="userid" required maxlength="20"></td>
+        </tr>
+
+        <tr>
+          <td>Password *</td>
+          <td><input id="password" type="password" required></td>
+        </tr>
+
+        <tr>
+          <td>Confirm *</td>
+          <td>
+            <input id="confirm" type="password" required>
+            <div id="pwError" class="error-msg" style="display:none;">Passwords must match.</div>
+          </td>
+        </tr>
+
+        <!-- Remember me -->
+        <tr>
+          <td>Remember Me</td>
+          <td>
+            <input id="rememberMe" type="checkbox" checked>
+            <span class="help">Store name + form data for 48 hours.</span>
+          </td>
+        </tr>
+
+        <!-- Buttons -->
+        <tr>
+          <td></td>
+          <td>
+            <button id="actionBtn" type="button">Review</button>
+            <button type="reset" id="fullReset">Clear and Start Over</button>
+          </td>
+        </tr>
+
+      </table>
+    </form>
+  </div>
+
+  <footer>
+    ZhenLife Medical Center © 2025 |
+    <a href="#">Privacy</a> |
+    <a href="#">Contact</a>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
