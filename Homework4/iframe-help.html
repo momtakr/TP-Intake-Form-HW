@@ -2,35 +2,63 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Help & Info</title>
+<title>New Patient Checklist</title>
 <style>
   body {
     font-family: Arial, Helvetica, sans-serif;
-    padding: 14px;
+    padding: 14px 16px;
+    margin: 0;
     background: #fafafa;
   }
-  h2 {
-    margin-top: 0;
+
+  .card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 14px 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    border: 1px solid #e0e0e0;
+  }
+
+  .card-title {
+    margin: 0 0 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
     color: #1c5e37;
   }
+
+  .card-sub {
+    margin: 0 0 10px;
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  ul {
+    margin: 0 0 10px 18px;
+    padding: 0;
+    font-size: 0.9rem;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
   a {
+    font-size: 0.9rem;
     color: #0d47a1;
     text-decoration: underline;
   }
 </style>
 </head>
-
 <body>
-  <h2>Helpful Info</h2>
-  <p>This is an embedded help panel loaded via an iframe as required for Assignment 4.</p>
-
-  <p>External resource (clickable):</p>
-  <ul>
-    <li><a href="https://www.w3schools.com/js" target="_blank">W3Schools JavaScript Reference</a></li>
-    <li><a href="https://www.w3schools.com/html" target="_blank">HTML Reference</a></li>
-    <li><a href="https://www.w3schools.com/css" target="_blank">CSS Reference</a></li>
-  </ul>
-
-  <p>You can modify this page to include FAQs, patient help instructions, or anything else.</p>
+  <div class="card">
+    <h2 class="card-title">New Patient Checklist</h2>
+    <p class="card-sub">Before your appointment, try to have:</p>
+    <ul>
+      <li>Your photo ID and insurance card (if any)</li>
+      <li>A list of current medications and allergies</li>
+      <li>Recent test results or hospital discharge papers</li>
+    </ul>
+    <a href="https://www.w3schools.com/html/" target="_blank">Learn more about online forms</a>
+  </div>
 </body>
 </html>
