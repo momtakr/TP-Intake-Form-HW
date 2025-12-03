@@ -175,10 +175,6 @@ footer {
   cursor: pointer;
 }
 
-.modal-btn.danger {
-  background: rgba(0,0,0,0.45);
-}
-
 /* IFRAME */
 
 .iframe-section {
@@ -237,4 +233,8 @@ input[type="date"]:valid,
 select:valid {
   font-style: normal;
   color: #000;
+}
+
+.modal-btn.danger {
+  background: rgba(0,0,0,0.45) !important;
 }
