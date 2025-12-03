@@ -182,18 +182,23 @@ footer {
 /* IFRAME */
 
 .iframe-section {
-  margin-top: 20px;
-  margin-bottom: 28px;
+  margin: 20px 0 28px;
   padding: 18px;
   background: #ffffff;
   border: 1px solid #ccc;
   border-radius: 8px;
 }
 
+.iframe-intro {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  color: #444;
+}
+
 iframe {
   width: 100%;
-  height: 300px;
-  border: 1px solid #777;
+  height: 190px;
+  border: 1px solid #ddd;
   border-radius: 6px;
 }
 
